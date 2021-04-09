@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>Course Videos</title>
+	<link rel="stylesheet" href="/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/style.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
+	<script src="/js/modernizr.js"></script>
+	<!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+	
+	<!-- ====================================================
+	header section -->
+	<header class="top-header">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-5 header-logo">
+					<br>
+					<a href="/psyhome"><img  src="{{asset('img')}}/logo.png"   alt="" class="img-responsive logo" ></a>
+				</div>
+
+				<div class="col-md-7">
+					<nav class="navbar navbar-default">
+					  <div class="container-fluid nav-bar">
+					    <!-- Brand and toggle get grouped for better mobile display -->
+					    <div class="navbar-header">
+					      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					      </button>
+					    </div>
+
+					    <!-- Collect the nav links, forms, and other content for toggling -->
+					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					      
+					      <ul class="nav navbar-nav navbar-right">
+					        <li><a class="menu active" href="/psyhome" >Home</a></li>
+					        <li><a class="menu " href="/psyaddarticle">Add Articles</a></li>
+					        <li><a class="menu" href="/psycourses">Courses </a></li>
+					        <li><a class="menu" href="/psyaddcourse">Add Course</a></li>
+					        <li><a class="menu" href="/psyMessages"> Messages</a></li>
+							<li>
+							<div class="dropdown">
+                            <button class="dropbtn">{{session('user2')}}</button>
+                            <div class="dropdown-content">
+                            <a href="#">Profile</a>
+                            <a href="#">Setting</a>
+                            <a href="/logout2">Logout</a>
+                            </div>
+                            </div>
+							</li>
+					      </ul>
+					    </div><!-- /navbar-collapse -->
+					  </div><!-- / .container-fluid -->
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header> <!-- end of header area -->
+
+	
+<br>
+<br>
+<br>
+
+<br>
+<br>
+
+<br>
+@if(Session::get('video_deleted'))
+  <div class="alert alert-success">
+    {{Session::get('video_deleted')}}
+    </div>
+    @endif
+    <br>
+<br>
+<br>
+
+<br>
+<br>
+<br>
+<h2  style=" text-align: center">Course Videos</h2>
+
+
+<div class="container " style="border-style: outset;background-color:skyblue;width: 850px"> 
+<h3  style="padding-left:100px">
+Course ID:{{$data->CourseID}}
+</h3> 
+
+<h3  style="padding-left:100px">
+{{$data->CourseTitle}}
+</h3>
+<p style="padding-left:100px;font-size: 16px;">{{$data->CourseDescription}}</p>
+<br>
+<h4  style=" text-align: center">Videos</h4>
+@foreach($videodata as $vdata)
+@if($data->CourseID==$vdata->CourseID)
+<h4  style="padding-left:100px">
+<strong>#{{$vdata->VideoTitle}}</strong>
+</h4>
+<p style="max-width:150px; padding-left:100px;">
+<iframe src="{{asset('uploads')}}/{{$vdata->Files}}"   ></iframe>
+<a href= "/deletevideo/{{$vdata->id}}" class="btn btn-danger" style="right: 300px;">Delete Video</a>
+</p>
+@endif
+@endforeach
+<br>
+<a href= "/addvideo" class="btn btn-info" style="position: absolute;right: 820px; ">Add Video</a>
+
+</div>
+
+<br>
+<br>
+<br>
+	
+
+
+ <!-- footer starts here -->
+	 <!-- Site footer -->
+	 
+	 <footer class="site-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-12 col-md-3">
+		  <h6><a href="#">About Us</a></h6>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+            <h6><a href="#">Contact Us</a></h6>
+          </div>
+
+          <div class="col-xs-6 col-md-3">
+		  <h6> <h6><a href="#">Support</a></h6></h6>
+		  </div>
+		  
+          <div class="col-xs-6 col-md-3">
+		   <h6><a href="#">FAQ</a></h6>
+		   </div>
+        </div>
+        <hr>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-sm-6 col-xs-12">
+            <p style="text-align: left" class="copyright-text"> Copyright &copy;  All Rights Reserved by CSE PUST
+            </p>
+          </div>
+		  
+		  <div class="col-md-4 col-sm-6 col-xs-12">
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
+            </ul>
+          </div>
+
+        </div>
+	  </div>
+	  
+
+</footer>
+
+<!-- script tags
+	============================================================= -->
+	<script src="js/jquery-2.1.1.js"></script>
+	<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+	<script src="js/gmaps.js"></script>
+	<script src="js/smoothscroll.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/custom.js"></script>
+    </body>
+</html>
