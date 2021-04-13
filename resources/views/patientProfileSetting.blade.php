@@ -22,6 +22,11 @@ body{
 <br> 
 <br>
 <br>
+@if(Session::get('Profile_Updated'))
+  <div class="alert alert-success">
+    {{Session::get('Profile_Updated')}}
+    </div>
+    @endif
 <br>
 <br>
 

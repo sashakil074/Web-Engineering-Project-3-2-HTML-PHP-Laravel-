@@ -1,10 +1,13 @@
-@extends('patientlayout2')
-@section('title2')
-Patient Profile
+@extends('adminlayout')
+
+@section('admintitle')
+Admin Profile
 @stop
 
-@section('content3')
-
+@section('admincontent')
+<br>
+<br>
+<br>
 <style>
               input.hidden {
     position: absolute;
@@ -18,11 +21,14 @@ Patient Profile
     height: 100px;
 	border:2px solid #03b1ce ;}
 	.tital{ font-size:16px; font-weight:500;}
-	 .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:5px 0  5px 0}	
-   body{
-        background-image: url({{asset('img')}}/profilePagePhoto.jpg);
-     }
+	 .bot-border{ border-bottom:1px #f8f8f8 solid;  margin:5px 0  5px 0}
+
+     body{
+      background-image: url({{asset('img')}}/profilePagePhoto.jpg);
+     }	
+
 </style>
+
 <br>
 <br>
 <br>
@@ -31,7 +37,8 @@ Patient Profile
 <br>
 <br>
 <br>
-@foreach($userdata as $data)
+
+@foreach($admindata as $data)
 <div class="container" style="margin:auto;width:850px;background: transparent">
 	<div class="row">
         
@@ -61,13 +68,13 @@ Patient Profile
                      
                      </div>
               
-              <br>
+             
     
               <!-- /input-group -->
             </div>
             <div class="col-sm-6">
             <h4 style="color:black;">{{$data->Name}}</h4></span>
-              <span><p>{{$data->Username}}</p></span>         
+              <span><p>Admin</p></span>         
             </div>
             <div class="clearfix"></div>
             <hr style="margin:5px 0 5px 0;">
@@ -76,7 +83,9 @@ Patient Profile
 <div class="col-sm-5 col-xs-6 tital " >Name:</div><div class="col-sm-7 col-xs-6 ">{{$data->Name}}</div>
      <div class="clearfix"></div>
 <div class="bot-border"></div>
-
+<div class="col-sm-5 col-xs-6 tital " >Admin ID:</div><div class="col-sm-7"> {{$data->Admin_ID}}</div>
+  <div class="clearfix"></div>
+<div class="bot-border"></div>
 <div class="col-sm-5 col-xs-6 tital " >Username:</div><div class="col-sm-7"> {{$data->Username}}</div>
   <div class="clearfix"></div>
 <div class="bot-border"></div>
@@ -85,19 +94,8 @@ Patient Profile
   <div class="clearfix"></div>
 <div class="bot-border"></div>
 
-<div class="col-sm-5 col-xs-6 tital " >Birth Year:</div><div class="col-sm-7">{{$data->Birth_year}}</div>
-
+<div class="col-sm-5 col-xs-6 tital " >Division:</div><div class="col-sm-7"> {{$data->Division}}</div>
   <div class="clearfix"></div>
-<div class="bot-border"></div>
-
-<div class="col-sm-5 col-xs-6 tital " >Division:</div><div class="col-sm-7">{{$data->Division}}</div>
-
-  <div class="clearfix"></div>
-<div class="bot-border"></div>
-
-<div class="col-sm-5 col-xs-6 tital " >District:</div><div class="col-sm-7">{{$data->District}}</div>
-
- <div class="clearfix"></div>
 <div class="bot-border"></div>
 
 <div class="col-sm-5 col-xs-6 tital " >Email:</div><div class="col-sm-7">{{$data->Email}}</div>
@@ -107,16 +105,7 @@ Patient Profile
 
 <div class="col-sm-5 col-xs-6 tital " >Contact:</div><div class="col-sm-7">{{$data->Contact}}</div>
 
-<div class="clearfix"></div>
-<div class="bot-border"></div>
 
-<div  class="col-sm-5 col-xs-6 tital "  ><strong>My Card:</strong></div><div class="col-sm-7"></div>
-<div class="clearfix"></div>
-<div class="col-sm-5 col-xs-6 tital " >Card Number:</div><div class="col-sm-7">{{$data->NID_no}}</div>
-<div class="clearfix"></div>
-<div class="col-sm-5 col-xs-6 tital " >Balance:</div><div class="col-sm-7">{{$cardbalance}}</div>
-<div class="clearfix"></div>
-<div class="col-sm-5 col-xs-6 tital " ><button onclick="window.location.href='/rechargeMyCard'" style=" background-color:skyblue;padding:3px">Recharge My Card</button></div>
 
 
             <!-- /.box-body -->
@@ -154,4 +143,8 @@ Patient Profile
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+
 @stop

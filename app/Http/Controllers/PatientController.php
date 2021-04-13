@@ -8,6 +8,7 @@ use App\Models\Course;
 use App\Models\Coursevideo;
 use App\Models\Payment;
 use App\Models\Card;
+use App\Models\Recharge;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -195,4 +196,39 @@ public function showPsyList()
       return back()->with('Profile_Updated','Profile Updated successfully');
 
     }
+
+    public function showRechargeMyCard(Request $request)
+    {
+        $card_no=Card::where('Username',$request->session()->get('user'))->first()->CardNo;
+
+          return view('rechargeMyCard',compact('card_no'));
+
+    
+    }
+
+    public function rechargeMyCard(Request $request)
+    {
+       
+        $request->validate(
+            [
+               'Card_no'=>'required' ,
+               'Amount'=>'required'
+            ]
+            );
+
+      $rechargeData= new Recharge;
+
+      $Name= Patient::where('Username',$request->session()->get('user'))->first()->Name;
+      $rechargeData->Name=$Name;
+      $rechargeData->Username=$request->session()->get('user');
+      $rechargeData->Card_no=$request->input('Card_no');
+      $rechargeData->Amount=$request->input('Amount');
+      $rechargeData->Status='0';
+
+      $rechargeData->save();
+
+      return back()->with('recharge_requested','Recharge request has been sent successfully');
+    }
+
+
 }

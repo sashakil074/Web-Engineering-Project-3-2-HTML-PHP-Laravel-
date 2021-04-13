@@ -1,10 +1,10 @@
-@extends('psylayout2')
-@section('title2')
-Profile Setting
+@extends('adminlayout')
+
+@section('admintitle')
+Admin Profile Setting
 @stop
 
-@section('content2')
-
+@section('admincontent')
 <style>
 body{
     background-image: url(img/profilePagePhoto.jpg);
@@ -30,14 +30,14 @@ body{
 <br>
 <br>
 
-   @foreach($userdata as $data)
+   @foreach($admindata as $data)
 
 <div class="container " style="border-style: none; background-color:aqua;max-width:500px;opacity:90%" >
 <br>
 <h2  style=" text-align: center">Edit Profile</h2>
 <br>
 
-<form action="{{route('updateProfile2')}}" method="post" enctype="multipart/form-data" >
+<form action="{{route('updateProfile4')}}" method="post" enctype="multipart/form-data" >
 @csrf
 
 <input type="hidden" name="id"  value="{{$data->id}}" />
@@ -50,20 +50,8 @@ body{
     <input type="text" name="NID_no" class="form-control" id="" value="{{$data->NID_no}}">
   </div>
   <div class="form-group">
-    <label >Position</label>
-    <input type="text" name="Position" class="form-control" id="" value="{{$data->Position}}">
-  </div>
-  <div class="form-group">
-  <label >Work place</label>
-    <input type="text" name="Work_place" class="form-control" id="" value="{{$data->Work_place}}">
-  </div>
-  <div class="form-group">
   <label >Division</label>
     <input type="text" name="Division" class="form-control" id="" value="{{$data->Division}}">
-  </div>
-  <div class="form-group">
-  <label >District</label>
-    <input type="text" name="District" class="form-control" id="" value="{{$data->District}}">
   </div>
   <div class="form-group">
   <label >Email</label>
@@ -95,5 +83,6 @@ body{
 <br>
 <br>
 <br>
+
 
 @stop

@@ -7,6 +7,8 @@ use App\Http\Controllers\PsyRegController;
 use App\Http\Controllers\PsyLoginController;
 use App\Http\Controllers\PsyController;
 use App\Http\Controllers\PatientController;
+use App\Http\Controllers\SuperAdminController;
+use App\Http\Controllers\AdminController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -147,8 +149,88 @@ Route::post('makepayment', [PatientController::class,'makePayment'])->name('make
 Route::get('/patientprofile', [PatientController::class,'viewPatientProfile']);
 Route::get('/patientProfileSetting', [PatientController::class,'viewPatientProfileSetting']);
 Route::post('updateProfile', [PatientController::class,'updateProfile'])->name('updateProfile');
+//Route::view('rechargeMyCard','rechargeMyCard');
+Route::get('/rechargeMyCard', [PatientController::class,'showRechargeMyCard']);
+Route::post('rechargeMyCard', [PatientController::class,'rechargeMyCard'])->name('recharge.card');
 
 //Psychologist profile page,profile setting
 Route::get('/psyprofile', [PsyController::class,'viewPsyProfile']);
 Route::get('/psyProfileSetting', [PsyController::class,'viewPsyProfileSetting']);
 Route::post('updateProfile2', [PsyController::class,'updateProfile'])->name('updateProfile2');
+
+
+//super admin
+//Route::view('superadminLogin','superadminLogin');
+Route::post('superadminhome', [SuperAdminController::class,'superadminLogin']);
+Route::get('/superadminLogin', function () {
+
+    if(session()->has('superadmin'))
+    {
+        return redirect('superadminhome');
+    }
+    return view('superadminLogin');
+    
+});
+
+Route::get('/logout3', function () {
+
+    if(session()->has('superadmin'))
+    {
+        session()->pull('superadmin');
+    }
+    return redirect('superadminLogin');
+    
+});
+
+Route::view('superadminhome','superadminhome');
+//Admin
+//Route::view('superadminLogin','superadminLogin');
+Route::post('adminhome', [AdminController::class,'adminLogin']);
+Route::get('/adminLogin', function () {
+
+    if(session()->has('admin'))
+    {
+        return redirect('adminhome');
+    }
+    return view('adminLogin');
+    
+});
+
+Route::get('/logout4', function () {
+
+    if(session()->has('admin'))
+    {
+        session()->pull('admin');
+    }
+    return redirect('adminLogin');
+    
+});
+
+
+//Super Admin
+Route::get('/superadminhome',[SuperAdminController::class,'showAdmin']);
+Route::get('/saAddAdmin',[SuperAdminController::class,'showaddAdmin']);
+Route::post('saAddAdmin', [SuperAdminController::class,'addAdmin'])->name('addAdmin');
+Route::get('/saCourses',[SuperAdminController::class,'showCourse']);
+Route::get('/deleteAdmin/{id}',[SuperAdminController::class,'deleteAdmin']);
+Route::get('/deleteCourse/{id}',[SuperAdminController::class,'deleteCourse']);
+
+//Super Admin profile page,profile setting
+Route::get('/saprofile', [SuperAdminController::class,'viewSaProfile']);
+Route::get('/saProfileSetting', [SuperAdminController::class,'viewSaProfileSetting']);
+Route::post('updateProfile3', [SuperAdminController::class,'updateProfile'])->name('updateProfile3');
+
+//Admin
+Route::get('/adminAllPatients',[AdminController::class,'showPatients']);
+Route::get('/adminAllPsychologists',[AdminController::class,'showPsychologists']);
+Route::get('/adminCourses',[AdminController::class,'showCourse']);
+Route::get('/deletePatient/{id}',[AdminController::class,'deletePatient']);
+Route::get('/deletePsychologist/{id}',[AdminController::class,'deletePsychologist']);
+Route::get('/deleteCourse/{id}',[AdminController::class,'deleteCourse']);
+Route::get('/adminRecharge',[AdminController::class,'showRechargeRequests']);
+Route::get('/rechargeCard/{id}',[AdminController::class,'rechargeCard']);
+
+//Admin profile page,profile setting
+Route::get('/adminprofile', [AdminController::class,'viewAdminProfile']);
+Route::get('/adminProfileSetting', [AdminController::class,'viewAdminProfileSetting']);
+Route::post('updateProfile4', [AdminController::class,'updateProfile'])->name('updateProfile4');
