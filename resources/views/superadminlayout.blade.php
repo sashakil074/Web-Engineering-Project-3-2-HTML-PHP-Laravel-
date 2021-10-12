@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<title>@yield('satitle')</title>
+	<link href="/img/logo.png" rel="icon">
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/style.css">
@@ -50,7 +51,7 @@
 					        <li><a class="menu active" href="/superadminhome" >Home</a></li>
 					        <li><a class="menu " href="/saAddAdmin">Add Admin</a></li>
 					        <li><a class="menu" href="/saCourses">Courses </a></li>
-					        <li><a class="menu" href="/feedback"> Feedbacks</a></li>
+					        <li><a class="menu" href="/superadminfeedback"> Feedbacks</a></li>
 							<li>
 							<div class="dropdown">
                             <button class="dropbtn">{{session('superadmin')}}</button>
@@ -95,7 +96,7 @@
 		  </div>
 		  
           <div class="col-xs-6 col-md-3">
-		   <h6><a href="#">FAQ</a></h6>
+		   <h6><a href="/superadminfeedback">Feedbacks</a></h6>
 		   </div>
         </div>
         <hr>

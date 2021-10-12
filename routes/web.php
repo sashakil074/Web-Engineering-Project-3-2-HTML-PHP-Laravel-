@@ -9,6 +9,7 @@ use App\Http\Controllers\PsyController;
 use App\Http\Controllers\PatientController;
 use App\Http\Controllers\SuperAdminController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\IndexController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -234,3 +235,22 @@ Route::get('/rechargeCard/{id}',[AdminController::class,'rechargeCard']);
 Route::get('/adminprofile', [AdminController::class,'viewAdminProfile']);
 Route::get('/adminProfileSetting', [AdminController::class,'viewAdminProfileSetting']);
 Route::post('updateProfile4', [AdminController::class,'updateProfile'])->name('updateProfile4');
+
+
+//Patient/Psychologist/visitor/admin/s admin feedback page
+Route::get('/patientfeedback', [PatientController::class,'showFeedbacks']);
+Route::post('patientfeedback', [PatientController::class,'addFeedback'])->name('patient.feedback');
+
+Route::get('/psyfeedback', [PsyController::class,'showFeedbacks']);
+Route::post('psyfeedback', [PsyController::class,'addFeedback'])->name('psy.feedback');
+
+
+Route::get('/adminfeedback', [AdminController::class,'showFeedbacks']);
+
+Route::get('/superadminfeedback', [SuperAdminController::class,'showFeedbacks']);
+
+//Route::view('index','index');
+Route::get('/index', [IndexController::class,'viewload']);
+Route::view('all_feedbacks','all_feedbacks');
+
+Route::post('index', [IndexController::class,'addFeedback'])->name('forms/contact.php');

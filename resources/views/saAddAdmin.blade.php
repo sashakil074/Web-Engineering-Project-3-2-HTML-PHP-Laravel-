@@ -61,7 +61,7 @@ body{
         </div>    
 <br>        
     <div class="container " style="border-style: none; background-color:aqua;max-width:500px;opacity:90%">
-        <h1 style="color: white;text-align:center">Add Admin</h1>
+        <h1 style="color: black;text-align:center">Add Admin</h1>
      <form action="{{route('addAdmin')}}" method="post" >
        @csrf
     <input type="text" name="Name" class="form-control" placeholder=" Name" >

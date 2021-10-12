@@ -10,6 +10,7 @@ use App\Models\Payment;
 use App\Models\Card;
 use App\Models\Admin;
 use App\Models\Recharge;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -172,4 +173,15 @@ class AdminController extends Controller
 
      return back()->with('recharge_success','Card Recharge Successfull');
     }
+
+    
+    public function showFeedbacks()
+    {
+     $feedbackdata=Feedback::all();
+    
+
+    return view('adminfeedback',compact('feedbackdata'));
+    }
+
+    
 }

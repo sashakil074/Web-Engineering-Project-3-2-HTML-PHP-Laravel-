@@ -5,6 +5,7 @@ use App\Models\Article;
 use App\Models\Course;
 use App\Models\Psychologist;
 use App\Models\Coursevideo;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 
 class PsyController extends Controller
@@ -311,4 +312,41 @@ class PsyController extends Controller
       return back()->with('Profile_Updated','Profile Updated successfully');
 
     }
+
+
+    
+    public function showFeedbacks()
+    {
+     $feedbackdata=Feedback::all();
+    
+
+    return view('psyfeedback',compact('feedbackdata'));
+    }
+
+
+    public function addFeedback(Request $request)
+    {
+      // return $request->input(); 
+      $request->validate(
+        [
+           'Name'=>'required' ,
+           'Email'=>'required' ,
+           'Feedback'=>'required'
+
+           
+        ]
+        );
+        
+     
+        $data= new Feedback;
+        $data->Name=$request->input('Name');
+        $data->Status='Psychologist';
+        $data->Username=$request->session()->get('user2');
+        $data->Email=$request->input('Email');
+        $data->Feedback=$request->input('Feedback');
+        $data->save();
+      
+      $request->session()->flash('feedback_given','Your feedback has been submitted');
+      return redirect('psyfeedback');
+}
 }

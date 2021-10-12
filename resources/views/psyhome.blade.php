@@ -18,14 +18,14 @@ Home
 @foreach($articledata as $data)
 @if(session('user2')==$data->Username)
 <div class="container article" style="border-style: none;background: linear-gradient(to right, #25c481, #25b7c4);" >  
-<h2  style="padding-left:100px">
+<h2  style="padding-left:100px;color: #fff;">
 {{$data->Title}}
 </h2>
 
 
-<p style="padding-left:100px" id="datetime">{{$data->created_at}}</p>
+<p style="padding-left:100px;color: #fff;" id="datetime">{{$data->created_at}}</p>
 
-<p style="padding-left:90px;font-size: 25px;">{{$data->Articles}}</p>
+<p style="padding-left:90px;font-size: 25px;color: #fff;">{{$data->Articles}}</p>
 <img src="{{asset('images')}}/{{$data->Files}}"  style="max-width:500px; padding-left:90px"/>
 <br>
 <br>

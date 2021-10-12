@@ -9,6 +9,7 @@ use App\Models\Coursevideo;
 use App\Models\Payment;
 use App\Models\Card;
 use App\Models\Recharge;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -229,6 +230,42 @@ public function showPsyList()
 
       return back()->with('recharge_requested','Recharge request has been sent successfully');
     }
+
+
+    public function showFeedbacks()
+    {
+     $feedbackdata=Feedback::all();
+    
+
+    return view('patientfeedback',compact('feedbackdata'));
+    }
+
+
+    public function addFeedback(Request $request)
+    {
+      // return $request->input(); 
+      $request->validate(
+        [
+           'Name'=>'required' ,
+           'Email'=>'required' ,
+           'Feedback'=>'required'
+
+           
+        ]
+        );
+        
+     
+        $data= new Feedback;
+        $data->Name=$request->input('Name');
+        $data->Status='Patient';
+        $data->Username=$request->session()->get('user');
+        $data->Email=$request->input('Email');
+        $data->Feedback=$request->input('Feedback');
+        $data->save();
+      
+      $request->session()->flash('feedback_given','Your feedback has been submitted');
+      return redirect('patientfeedback');
+}
 
 
 }

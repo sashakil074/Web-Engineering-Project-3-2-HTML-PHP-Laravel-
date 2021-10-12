@@ -36,6 +36,7 @@ jQuery(document).ready(function () {
             });
         });
     });
+    
 
     function onScroll(event) {
         var scrollPos = $(document).scrollTop();

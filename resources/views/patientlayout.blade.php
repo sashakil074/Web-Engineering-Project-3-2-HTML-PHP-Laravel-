@@ -6,19 +6,39 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<title>@yield('title')</title>
+
+	<script>
+      $(function () {
+  // this will get the full URL at the address bar
+  var url = window.location.href;
+  // passes on every "a" tag
+  $(".navbar-nav .nav-link").each(function () {
+    // checks if its the same on the address bar
+    if (url == (this.href)) {
+      $(this).closest("li").addClass("active");
+      //for making parent of submenu active
+      $(this).closest("li").parent().parent().addClass("active");
+    }
+  });
+});
+</script>
+	<link href="/img/logo.png" rel="icon">
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/style.css">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
 	<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
 	<script src="/js/modernizr.js"></script>
+	<script src="js/custom.js"></script>
 	<!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
     <![endif]-->
 
+
 </head>
 <body>
+	
 	
 	<!-- ====================================================
 	header section -->
@@ -47,21 +67,8 @@
 					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					      
 					      <ul class="nav navbar-nav navbar-right">
-					        <li><a class="menu active" href="/patienthome" >Home</a></li>
-					        <li><a class="menu " href="/patientcourses">Courses</a></li>
-					        <li><a class="menu" href="/patientPsyList">Psychologists </a></li>
-					        <li><a class="menu" href="/patientSearchPsy">Search Psychologists</a></li>
-					        <li><a class="menu" href="/patientMessages">Contact Psychologists</a></li>
-							<li>
-							<div class="dropdown">
-                            <button class="dropbtn">{{session('user')}}</button>
-                            <div class="dropdown-content">
-                            <a href="/patientprofile">Profile</a>
-                            <a href="/patientProfileSetting">Setting</a>
-                            <a href="/logout">Logout</a>
-                            </div>
-                            </div>
-							</li>
+							  @yield('navitem1')
+					       
 					      </ul>
 					    </div><!-- /navbar-collapse -->
 					  </div><!-- / .container-fluid -->
@@ -155,11 +162,11 @@
           </div>
 
           <div class="col-xs-6 col-md-3">
-		  <h6> <h6><a href="#">Support</a></h6></h6>
+		  <h6> <h6><a href="#">FAQ</a></h6></h6>
 		  </div>
 		  
           <div class="col-xs-6 col-md-3">
-		   <h6><a href="#">FAQ</a></h6>
+		   <h6><a href="/patientfeedback">Feedbacks</a></h6>
 		   </div>
         </div>
         <hr>
@@ -187,11 +194,15 @@
 
 <!-- script tags
 	============================================================= -->
+	
+ 
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 	<script src="js/gmaps.js"></script>
 	<script src="js/smoothscroll.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/custom.js"></script>
+	
+
 </body>
 </html>

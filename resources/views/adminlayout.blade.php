@@ -51,7 +51,7 @@
 					        <li><a class="menu " href="/adminAllPsychologists">All psychologists</a></li>
 					        <li><a class="menu" href="/adminCourses">Courses </a></li>
                             <li><a class="menu" href="/adminRecharge"> Recharge </a></li>
-					        <li><a class="menu" href="/feedback"> Feedbacks</a></li>
+					        <li><a class="menu" href="/adminfeedback"> Feedbacks</a></li>
 							<li>
 							<div class="dropdown">
                             <button class="dropbtn">{{session('admin')}}</button>
@@ -96,7 +96,7 @@
 		  </div>
 		  
           <div class="col-xs-6 col-md-3">
-		   <h6><a href="#">FAQ</a></h6>
+		   <h6><a href="/adminfeedback">Feedbacks</a></h6>
 		   </div>
         </div>
         <hr>

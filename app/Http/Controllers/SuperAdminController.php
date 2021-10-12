@@ -10,6 +10,7 @@ use App\Models\Payment;
 use App\Models\Card;
 use App\Models\Superadmin;
 use App\Models\Admin;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 
 class SuperAdminController extends Controller
@@ -179,5 +180,13 @@ class SuperAdminController extends Controller
 
       return back()->with('Profile_Updated','Profile Updated successfully');
 
+    }
+
+    public function showFeedbacks()
+    {
+     $feedbackdata=Feedback::all();
+    
+
+    return view('superadminfeedback',compact('feedbackdata'));
     }
 }

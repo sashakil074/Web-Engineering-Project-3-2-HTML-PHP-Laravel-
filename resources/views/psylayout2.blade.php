@@ -6,6 +6,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 	<title>@yield('title2')</title>
+	<link href="/img/logo.png" rel="icon">
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/style.css">
@@ -98,7 +99,7 @@
 		  </div>
 		  
           <div class="col-xs-6 col-md-3">
-		   <h6><a href="#">FAQ</a></h6>
+		   <h6><a href="/psyfeedback">Feedbacks</a></h6>
 		   </div>
         </div>
         <hr>
