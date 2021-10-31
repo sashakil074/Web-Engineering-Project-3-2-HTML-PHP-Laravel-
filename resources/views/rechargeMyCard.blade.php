@@ -31,11 +31,13 @@ Recharge My Card
 <br>
 <br>
 <br>
+<div>
 @if(Session::get('recharge_requested'))
   <div class="alert alert-success">
     {{Session::get('recharge_requested')}}
     </div>
     @endif
+</div>
 <h2  style=" text-align: center">Recharge My Card</h2>
 <div class="container article" style="border-style: none;" >
 <form action="{{route('recharge.card')}}" method="post" enctype="multipart/form-data" >

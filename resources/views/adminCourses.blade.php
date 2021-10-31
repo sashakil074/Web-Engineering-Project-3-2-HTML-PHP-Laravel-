@@ -13,12 +13,13 @@ All Courses
 <br>
 
 <h1 style="text-align:center">All Courses</h1>
-
+<div>
 @if(Session::get('Course_deleted'))
   <div class="alert alert-success">
     {{Session::get('Course_deleted')}}
     </div>
     @endif
+</div>
 <br>
 @foreach($coursedata as $data)
 

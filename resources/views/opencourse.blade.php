@@ -83,11 +83,13 @@
 <br>
 
 <br>
+<div>
 @if(Session::get('video_deleted'))
   <div class="alert alert-success">
     {{Session::get('video_deleted')}}
     </div>
     @endif
+</div>
     <br>
 <br>
 <br>

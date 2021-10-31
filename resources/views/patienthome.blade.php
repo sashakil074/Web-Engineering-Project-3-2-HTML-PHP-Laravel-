@@ -24,10 +24,11 @@ Home
 <h1 style="text-align:center">Articles</h1>
 
 <br>
+
 @foreach($articledata as $data)
 <div class="container article" style="border-style:none;background: linear-gradient(to right, #25c481, #25b7c4);">
 <h3  style="padding-left:90px; text-transform: uppercase;color: #fff;">
-{{$psyname}}
+{{$data->Name}}
 </h3>
 <p style="padding-left:90px;color: #fff;" id="datetime">{{$data->created_at}}</p>
 

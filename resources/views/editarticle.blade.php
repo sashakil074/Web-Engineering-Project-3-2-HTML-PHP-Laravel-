@@ -11,11 +11,13 @@ Edit Article
 <br>
 <br>
 <br>
+<div>
 @if(Session::get('status4'))
   <div class="alert alert-success">
     {{Session::get('status4')}}
     </div>
     @endif
+</div>
     <br>
 <br>
 <br>

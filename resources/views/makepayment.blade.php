@@ -11,17 +11,21 @@ Payment
 <br>
 <br>
 <br>
+<div>
 @if(Session::get('CardnotExists'))
   <div class="alert alert-danger" role="alert" style="text-align: center;color:red">
     {{Session::get('CardnotExists')}}
     </div>
     @endif
+</div>
     <br>
+    <div>
     @if(Session::get('balancenotsufficient'))
   <div class="alert alert-danger" role="alert" style="text-align: center;color:red">
     {{Session::get('balancenotsufficient')}}
     </div>
     @endif
+</div>
 <br>
 <br>
 <h1 style="text-align:center">Make Payment</h1>

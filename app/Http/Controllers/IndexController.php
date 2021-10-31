@@ -40,4 +40,38 @@ class IndexController extends Controller
       // $request->session()->flash('feedback_given','Your feedback has been submitted');
        return redirect('index');
 }
+
+public function showFeedbacks()
+    {
+     $feedbackdata=Feedback::all();
+    
+
+    return view('all_feedbacks',compact('feedbackdata'));
+    }
+
+
+    public function addFeedbacks(Request $request)
+    {
+      // return $request->input(); 
+      $request->validate(
+        [
+           'Name'=>'required' ,
+           'Email'=>'required' ,
+           'Feedback'=>'required'
+
+           
+        ]
+        );
+        
+     
+        $data= new Feedback;
+        $data->Name=$request->input('Name');
+        $data->Status='Visitor';
+        $data->Email=$request->input('Email');
+        $data->Feedback=$request->input('Feedback');
+        $data->save();
+      
+      $request->session()->flash('feedback_given','Your feedback has been submitted');
+      return redirect('all_feedbacks');
+}
 }

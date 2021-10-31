@@ -104,11 +104,13 @@ td{
     </style>
 <br>
 <br>
+<div>
 @if(Session::get('admin_deleted'))
   <div class="alert alert-success">
     {{Session::get('admin_deleted')}}
     </div>
     @endif
+</div>
     <br>
 <h1 style="text-align:center">Admins</h1>
 

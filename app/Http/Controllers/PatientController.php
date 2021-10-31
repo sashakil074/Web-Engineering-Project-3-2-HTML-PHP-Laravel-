@@ -10,6 +10,7 @@ use App\Models\Payment;
 use App\Models\Card;
 use App\Models\Recharge;
 use App\Models\Feedback;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class PatientController extends Controller
@@ -17,15 +18,16 @@ class PatientController extends Controller
     //
     public function showArticle()
     {
-     $articledata=Article::all();
+     //$articledata=Article::all();
 
-     $psyname = Psychologist::join('articles', 'psychologists.Username', '=', 'articles.Username')->first()->Name;
+     //$psyname = Psychologist::join('articles', 'psychologists.Username', '=', 'articles.Username')->first();
                //->get(['psychologists.Name']);
-
+       $articledata = Psychologist::join('articles', 'psychologists.Username', '=', 'articles.Username')
+                ->get(['articles.*','psychologists.Name']);
  
     //$articledata->Name=$psyname;
    
-    return view('patienthome',compact('articledata','psyname'));
+    return view('patienthome',compact('articledata'));
     }
 
     //course sectoion
@@ -267,5 +269,99 @@ public function showPsyList()
       return redirect('patientfeedback');
 }
 
+public function showPatientInbox(Request $request)
+    {
 
+     //$Msgdata=Message::all();
+     $picdata = Psychologist::join('messages', 'psychologists.Username', '=', 'messages.PsyUsername')
+                                 ->get(['psychologists.ProfilePic']);
+ 
+    if(Message::where('PtUsername' , $request->session()->get('user'))->exists()){
+      $Msgdata=Psychologist::join('messages', 'psychologists.Username', '=', 'messages.PsyUsername')
+      ->where('messages.PtUsername' , $request->session()->get('user'))->orderBy('id', 'DESC')->get(['messages.*','psychologists.ProfilePic']);
+      $Msgdata=$Msgdata->unique('PsyUsername');
+
+      return view('patientMessages',compact('Msgdata','picdata'));
+    }
+    else
+    {
+      $Msgdata='0';
+      return view('patientMessages',compact('Msgdata','picdata'));
+    }
+    }
+    public function openMessage($PsyUsername,Request $request)
+    {
+    //$Msgdata=Message::all();
+    $temp='1';
+    $picdata=Psychologist::where('Username' ,'=', $PsyUsername)->get('*');
+    $picdata2=Patient::where('Username' ,'=', $request->session()->get('user'))->get('*');
+
+    if(Message::where('PsyUsername' , $PsyUsername)->exists()){
+
+      
+    if(Message::where('PtUsername' , $request->session()->get('user'))->exists()){
+      
+
+      $Msgdata = Message::where('PtUsername' , $request->session()->get('user'))
+                                  ->where('messages.PsyUsername',$PsyUsername)
+                                 ->get(['*']);
+      return view('patientOpenMessage',compact('Msgdata','temp','picdata','picdata2'));
+  }
+  else
+  {
+   $temp='0';
+    return view('patientOpenMessage',compact('temp','picdata','picdata2'));
+  }
+}
+else
+  {
+   // $Msgdata=Message::where('Username',$PsyUsername)->get('*');
+   $temp='0';
+    return view('patientOpenMessage',compact('picdata','temp','picdata2'));
+  }
+    
+    
+    }
+
+    public function sendMessage(Request $request)
+    {
+      if(file_exists($request->file('Files4'))){}
+          else{
+      $request->validate(
+        [
+          
+           'PtMessage'=>'required'
+          // 'Files4'=> 'required | mimes:jpg,png,jpeg,mp4,m4v,pdf,xls,txt,docx,ppt'
+        
+        ]
+        );
+      }
+        $data=new Message;
+        $data->Read2='0';
+        if(file_exists($request->file('Files4'))){
+          $data->Read2='1';
+          $files = $request->file('Files4');
+          $fileName=time().'.'.$files->extension();
+          $files->move(public_path('uploads'),$fileName);
+          $data->Files=$fileName;
+        }
+        
+
+      $PtMessage=$request->input('PtMessage');
+
+      
+      $data->PtUsername=$request->session()->get('user');
+      $data->PtName = Patient::where('Username',$data->PtUsername)->first()->Name;
+      $data->PsyUsername=$request->input('PsyUsername');
+      $data->PsyName = Psychologist::where('Username',$data->PsyUsername)->first()->Name;
+      $data->PtMessage=$PtMessage;
+      $data->Read1='0';
+      
+      
+     
+      $data->save();
+
+      return redirect('patientMessages');
+
+    }
 }

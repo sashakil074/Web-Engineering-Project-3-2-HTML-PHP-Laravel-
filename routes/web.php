@@ -100,8 +100,16 @@ Route::get('/psycourses',[PsyController::class,'showCourse']);
 //Route::view('psyaddcourse','psyaddcourse');
 Route::get('/psyaddcourse', [PsyController::class,'viewAddCourse']);
 Route::post('psyaddcourse', [PsyController::class,'addCourse'])->name('add.course');
-//Psychologist Messages page
-Route::view('psyMessages','psyMessages');
+
+
+//Psychologist messages page
+Route::get('/psyMessages', [PsyController::class,'showPsyInbox']);
+
+Route::get('/psyOpenMessage/{PtUsername}',[PsyController::class,'openMessage']);
+
+Route::post('psyOpenMessage', [PsyController::class,'sendMessage'])->name('send.Message2');
+
+
 
 //Patient courses page
 //Route::view('patientcourses','patientcourses');
@@ -110,12 +118,22 @@ Route::get('/patientcourses',[PatientController::class,'showCourse']);
 //Patient Psychologists List page
 //Route::view('patientPsyList','patientPsyList');
 Route::get('/patientPsyList',[PatientController::class,'showPsyList']);
+
+
 //Patient Search Psychologists page
 //Route::view('patientSearchPsy','patientSearchPsy');
 Route::get('/patientSearchPsy', [PatientController::class,'viewSearchPsy']);
 Route::post('patientSearchPsy', [PatientController::class,'searchPsy'])->name('search.Psy');
+
+
 //Patient contact Psychologists page
-Route::view('patientMessages','patientMessages');
+//Route::view('patientMessages','patientMessages');
+Route::get('/patientMessages', [PatientController::class,'showPatientInbox']);
+//Route::view('patientOpenMessage','patientOpenMessage');
+Route::get('/patientOpenMessage/{PsyUsername}',[PatientController::class,'openMessage']);
+//Route::get('/patientOpenMessage',[PatientController::class,'openMessage']);
+Route::post('patientOpenMessage', [PatientController::class,'sendMessage'])->name('send.Message');
+
 
 
 //Psychologist  Edit article,delete article
@@ -137,6 +155,8 @@ Route::get('/editcourse/{id}',[PsyController::class,'editCourse']);
 Route::post('updatecourse', [PsyController::class,'updateCourse'])->name('updateCourse');
 Route::get('/deletecourse/{id}',[PsyController::class,'deleteCourse']);
 Route::get('/deletevideo/{id}',[PsyController::class,'deleteVideo']);
+
+
 
 
 //Patient  open course,payment
@@ -251,6 +271,17 @@ Route::get('/superadminfeedback', [SuperAdminController::class,'showFeedbacks'])
 
 //Route::view('index','index');
 Route::get('/index', [IndexController::class,'viewload']);
-Route::view('all_feedbacks','all_feedbacks');
+//Route::view('all_feedbacks','all_feedbacks');
 
 Route::post('index', [IndexController::class,'addFeedback'])->name('forms/contact.php');
+
+Route::view('about','about');
+Route::view('contact','contact');
+Route::view('tac','tac');
+Route::view('pp','pp');
+Route::view('faq','faq');
+
+//Visitor feedback
+
+Route::get('/all_feedbacks', [IndexController::class,'showFeedbacks']);
+Route::post('all_feedbacks', [IndexController::class,'addFeedbacks'])->name('visitor.feedback');

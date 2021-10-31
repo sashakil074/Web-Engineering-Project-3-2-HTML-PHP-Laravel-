@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Feedbacks</title>
+  <title>FAQ</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -67,11 +67,17 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-        <li><a href="/index">Index</a></li>
-          <li><a href="/about">About</a></li>
+        @if(!empty(Session::get('user')))
+        <li> <a href="/patienthome">Home</a></li>
+       @elseif(!empty(Session::get('user2')))
+       <li><a href="/psyhome">Home</a></li>
+       @else
+       <li><a href="/index">Index</a></li>
+    @endif
+          <li ><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
-          <li><a href="/faq">FAQ</a></li>
-         <li class="active"><a href="/all_feedbacks">Feedbacks</a></li>
+          <li class="active"><a href="/faq">FAQ</a></li>
+         <li><a href="/all_feedbacks">Feedbacks</a></li>
           <li><a href="/tac">Terms and Conditions</a></li>
           <li><a href="/pp">Privacy Policy</a></li>
           </nav>
@@ -84,103 +90,74 @@
     <br>
     <br>
     <br>
-    <style>
+    <!-- ======= FAQ Section ======= -->
+    <section id="departments" class="departments">
+        <section id="faq" class="faq section-bg">
+      <div class="container">
 
-/* Style inputs with type="text", select elements and textareas */
-input[type=text], select, textarea {
-  width: 100%; /* Full width */
-  padding: 5px; /* Some padding */ 
-  border: 1px solid #ccc; /* Gray border */
-  border-radius: 4px; /* Rounded borders */
-  box-sizing: border-box; /* Make sure that padding and width stays in place */
-  margin-top: 6px; /* Add a top margin */
-  margin-bottom: 16px; /* Bottom margin */
-  max-height:60px;
-  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
-}
+        <div class="section-title">
+          <h2>Frequently Asked Questions</h2>
+          <p>Here are some frequently asked questions and answers about mental health care system.</p>
+        </div>
+       
+        <div class="faq-list">
+          <ul>
+            <li data-aos="fade-up">
+              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" class="collapse" href="#faq-list-1">What kind of mental health care system is this? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-1" class="collapse show" data-parent=".faq-list">
+                <p>
+                This is a online platform where people can treat their mental health problems in a easier and effective way.
+                </p>
+              </div>
+            </li>
 
-/* Style the submit button with a specific background color etc */
-input[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+            <li data-aos="fade-up" data-aos-delay="100">
+              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-2" class="collapsed">What kind of
+                 treatments does this system offer? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-2" class="collapse" data-parent=".faq-list">
+                <p>
+                  This system provides treatments for mental health problems through articles,online paid 
+                  courses and direct consultation with psychologists.
+                </p>
+              </div>
+            </li>
 
-/* When moving the mouse over the submit button, add a darker green color */
-input[type=submit]:hover {
-  background-color: #45a049;
-}
+            <li data-aos="fade-up" data-aos-delay="200">
+              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-3" class="collapsed">What are the articles in this system?<i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-3" class="collapse" data-parent=".faq-list">
+                <p>
+                  Aerticles are provided by psychologists to build knowledge about mental health problems and its solutions.
+                </p>
+              </div>
+            </li>
 
-/* Add a background color and some padding around the form */
-.containerf {
-  border-radius: 2px;
-  background-color: #41DBAB;
-  opacity: 80%;
-  padding: 10px;
+            <li data-aos="fade-up" data-aos-delay="300">
+              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-4" class="collapsed">What types of courses does this system offer? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-4" class="collapse" data-parent=".faq-list">
+                <p>
+                  Courses are provided by psychologists and consists of series of treatment videos.
+                  By taking these courses patients can improve their mental health.
+                </p>
+              </div>
+            </li>
 
-}
-</style>
-<br>
-<br>
-<br>
-<br>
-<div>
-@if(Session::get('feedback_given'))
-  <div class="alert alert-success">
-    {{Session::get('feedback_given')}}
-    </div>
-    @endif
-</div>
-    <br>
-<br>
+            <li data-aos="fade-up" data-aos-delay="400">
+              <i class="bx bx-help-circle icon-help"></i> <a data-toggle="collapse" href="#faq-list-5" class="collapsed">How to consult a psychologist? <i class="bx bx-chevron-down icon-show"></i><i class="bx bx-chevron-up icon-close"></i></a>
+              <div id="faq-list-5" class="collapse" data-parent=".faq-list">
+                <p>
+                  Patients can consult a psychologist through messages and take necessary medications.
+                  Consultation and medications are the most effective treatment for mental health problems.
+                </p>
+              </div>
+            </li>
 
-<br>
-<br>
-<h1 style="text-align:center">Feedbacks</h1>
-<div class="container" style="border-style:none;background:grey" >
+          </ul>
+          </div>
+        </div>
+    </section><!-- End Frequently Asked Questions Section -->
 
-<br>
-<br>
-@foreach($feedbackdata as $data)
-<div class="container article" style="max-width:1000px;border-style:inset;border-width:2px;">
-<h4  style="padding-left:90px; text-transform: uppercase;color: #fff;">
-{{$data->Name}}
-</h4>
-<p style="padding-left:90px;color: #fff;" id="datetime">{{$data->Status}}</p>
-
-<p style="padding-left:90px;font-size: 20px;color: #fff;">{{$data->Feedback}}</p>
-</div>
-<br>
-<br>
-
-@endforeach
-<br>
-<br>
-<div div class="containerf" style="border-style:groove;">
-<h1 style="text-align:center">Give Feedback</h1>
-  <form action="{{route('visitor.feedback')}}" method="post">
-   @csrf
-    <label > Name</label>
-    <input type="text"  name="Name" placeholder="Your name..">
-    <label > Email</label>
-    <input type="text"  name="Email" placeholder="Your Email..">
-    <label >Write Your Feedbacks</label>
-    <textarea  name="Feedback" placeholder="Write something.." style="height:200px"></textarea>
-
-    <button type="submit" class="btn btn-success"  style=" background-color: green;">Submit</button>
-
-  </form>
-</div>
-<br>
-<br>
-</div>
-<br>
-<br>
-<br>
-<br>
+               
+  
 </main>
 
   <!-- ======= Footer ======= -->

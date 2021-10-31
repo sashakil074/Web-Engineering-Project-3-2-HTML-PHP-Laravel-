@@ -40,9 +40,24 @@ class PsyRegController extends Controller
       $data->Contact=$request->input('Contact');
       $data->Username=$request->input('Username');
       $data->Password=$request->input('Password');
+
+      if(Psychologist::where('NID_no', $data->NID_no)->exists()){
+        return back()->with('error','This NID number already exists,try another!');
+      }
+      else if(Psychologist::where('Username', $data->Username)->exists())
+      {
+        return back()->with('error','This username already exists,try another!');
+      }
+      else if(Psychologist::where('Username', $data->Username)->exists())
+      {
+        return back()->with('error','This email already exists,try another!');
+      }
+      else
+      {
       $data->save();
 
       $request->session()->flash('status1','Psychologist Registration Successful');
       return redirect('psylogin');
+      }
     }
 }

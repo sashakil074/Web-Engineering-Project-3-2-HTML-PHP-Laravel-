@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Feedbacks</title>
+  <title>Contact Us</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -67,11 +67,17 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-        <li><a href="/index">Index</a></li>
-          <li><a href="/about">About</a></li>
-          <li><a href="/contact">Contact</a></li>
+        @if(!empty(Session::get('user')))
+        <li> <a href="/patienthome">Home</a></li>
+       @elseif(!empty(Session::get('user2')))
+       <li><a href="/psyhome">Home</a></li>
+       @else
+       <li><a href="/index">Index</a></li>
+    @endif
+          <li ><a href="/about">About</a></li>
+          <li class="active"><a href="/contact">Contact</a></li>
           <li><a href="/faq">FAQ</a></li>
-         <li class="active"><a href="/all_feedbacks">Feedbacks</a></li>
+         <li><a href="/all_feedbacks">Feedbacks</a></li>
           <li><a href="/tac">Terms and Conditions</a></li>
           <li><a href="/pp">Privacy Policy</a></li>
           </nav>
@@ -84,103 +90,54 @@
     <br>
     <br>
     <br>
-    <style>
+    <!-- ======= Contact Section ======= -->
+    <section id="contact" class="contact">
+      <div class="container">
 
-/* Style inputs with type="text", select elements and textareas */
-input[type=text], select, textarea {
-  width: 100%; /* Full width */
-  padding: 5px; /* Some padding */ 
-  border: 1px solid #ccc; /* Gray border */
-  border-radius: 4px; /* Rounded borders */
-  box-sizing: border-box; /* Make sure that padding and width stays in place */
-  margin-top: 6px; /* Add a top margin */
-  margin-bottom: 16px; /* Bottom margin */
-  max-height:60px;
-  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
-}
+        <div class="section-title">
+          <h2>Contact</h2>
+          <p>Our address and contacts</p>
+        </div>
+      </div>
 
-/* Style the submit button with a specific background color etc */
-input[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+      <div>
+        <iframe style="border:0; width: 100%; height: 350px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3644.5048753248475!2d89.27621125062923!3d24.01325518438415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39fe84f0ec23a72b%3A0x775d6cd53cbdad8b!2z4Kaq4Ka-4Kas4Kao4Ka-IOCmrOCmv-CmnOCnjeCmnuCmvuCmqCDgppMg4Kaq4KeN4Kaw4Kav4KeB4KaV4KeN4Kak4Ka_IOCmrOCmv-CmtuCnjeCmrOCmrOCmv-CmpuCnjeCmr-CmvuCmsuCmr-CmvA!5e0!3m2!1sbn!2sbd!4v1633503542042!5m2!1sbn!2sbd" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy" frameborder="0" allowfullscreen></iframe>
+      </div>
 
-/* When moving the mouse over the submit button, add a darker green color */
-input[type=submit]:hover {
-  background-color: #45a049;
-}
+      <div class="container">
+        <div class="row mt-5">
 
-/* Add a background color and some padding around the form */
-.containerf {
-  border-radius: 2px;
-  background-color: #41DBAB;
-  opacity: 80%;
-  padding: 10px;
+          <div class="col-lg-4">
+            <div class="info">
+              <div class="address">
+                <i class="icofont-google-map"></i>
+                <h4>Location:</h4>
+                <p>CSE-PUST,Rajapur,Pabna</p>
+              </div>
 
-}
-</style>
-<br>
-<br>
-<br>
-<br>
-<div>
-@if(Session::get('feedback_given'))
-  <div class="alert alert-success">
-    {{Session::get('feedback_given')}}
-    </div>
-    @endif
-</div>
-    <br>
-<br>
+              <div class="email">
+                <i class="icofont-envelope"></i>
+                <h4>Email:</h4>
+                <p>shakil.ahammed074@gmail.com</p>
+              </div>
 
-<br>
-<br>
-<h1 style="text-align:center">Feedbacks</h1>
-<div class="container" style="border-style:none;background:grey" >
+              <div class="phone">
+                <i class="icofont-phone"></i>
+                <h4>Call:</h4>
+                <p>+8801766165877</p>
+              </div>
 
-<br>
-<br>
-@foreach($feedbackdata as $data)
-<div class="container article" style="max-width:1000px;border-style:inset;border-width:2px;">
-<h4  style="padding-left:90px; text-transform: uppercase;color: #fff;">
-{{$data->Name}}
-</h4>
-<p style="padding-left:90px;color: #fff;" id="datetime">{{$data->Status}}</p>
+            </div>
 
-<p style="padding-left:90px;font-size: 20px;color: #fff;">{{$data->Feedback}}</p>
-</div>
-<br>
-<br>
+          </div>
 
-@endforeach
-<br>
-<br>
-<div div class="containerf" style="border-style:groove;">
-<h1 style="text-align:center">Give Feedback</h1>
-  <form action="{{route('visitor.feedback')}}" method="post">
-   @csrf
-    <label > Name</label>
-    <input type="text"  name="Name" placeholder="Your name..">
-    <label > Email</label>
-    <input type="text"  name="Email" placeholder="Your Email..">
-    <label >Write Your Feedbacks</label>
-    <textarea  name="Feedback" placeholder="Write something.." style="height:200px"></textarea>
 
-    <button type="submit" class="btn btn-success"  style=" background-color: green;">Submit</button>
+        </div>
 
-  </form>
-</div>
-<br>
-<br>
-</div>
-<br>
-<br>
-<br>
-<br>
+      </div>
+    </section><!-- End Contact Section -->
+               
+  
 </main>
 
   <!-- ======= Footer ======= -->

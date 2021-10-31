@@ -95,11 +95,13 @@ td{
     </style>
 <br>
 <br>
+<div>
 @if(Session::get('patient_deleted'))
   <div class="alert alert-success">
     {{Session::get('patient_deleted')}}
     </div>
     @endif
+    </div>
     <br>
 <h1 style="text-align:center">All Patients</h1>
 

@@ -11,11 +11,13 @@ Edit Course
 <br>
 <br>
 <br>
+<div>
 @if(Session::get('Course_Updated'))
   <div class="alert alert-success">
     {{Session::get('Course_Updated')}}
     </div>
     @endif
+</div>
     <br>
 <br>
 <br>

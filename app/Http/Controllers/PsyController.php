@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Course;
 use App\Models\Psychologist;
+use App\Models\Patient;
 use App\Models\Coursevideo;
 use App\Models\Feedback;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class PsyController extends Controller
@@ -349,4 +351,107 @@ class PsyController extends Controller
       $request->session()->flash('feedback_given','Your feedback has been submitted');
       return redirect('psyfeedback');
 }
+
+
+public function showPsyInbox(Request $request)
+    {
+    
+     //$Msgdata=Message::all();
+     $picdata = Patient::join('messages', 'patients.Username', '=', 'messages.PtUsername')
+                                 ->get(['patients.ProfilePic']);
+ 
+    if(Message::where('PsyUsername' , $request->session()->get('user2'))->exists()){
+      $Msgdata=Patient::join('messages', 'patients.Username', '=', 'messages.PtUsername')
+      ->where('messages.PsyUsername' , $request->session()->get('user2'))->orderBy('id', 'DESC')->get(['messages.*','patients.ProfilePic']);
+      $Msgdata=$Msgdata->unique('PtUsername');
+
+      return view('psyMessages',compact('Msgdata','picdata'));
+    }
+    else
+    {
+      $Msgdata='0';
+      return view('patientMessages',compact('Msgdata','picdata'));
+    }
+    }
+
+
+    public function openMessage($PtUsername,Request $request)
+    {
+    //$Msgdata=Message::all();
+    $temp='1';
+    $picdata=Patient::where('Username' ,'=', $PtUsername)->get('*');
+    $picdata2=Psychologist::where('Username' ,'=', $request->session()->get('user2'))->get('*');
+
+    if(Message::where('PtUsername' , $PtUsername)->exists()){
+
+      
+    if(Message::where('PsyUsername' , $request->session()->get('user2'))->exists()){
+      
+
+      $Msgdata = Message::where('PsyUsername' , $request->session()->get('user2'))
+                                  ->where('messages.PtUsername',$PtUsername)
+                                 ->get(['*']);
+      return view('psyOpenMessage',compact('Msgdata','temp','picdata','picdata2'));
+  }
+  else
+  {
+   $temp='0';
+    return view('psyOpenMessage',compact('temp','picdata','picdata2'));
+  }
+}
+else
+  {
+   // $Msgdata=Message::where('Username',$PsyUsername)->get('*');
+   $temp='0';
+    return view('psyOpenMessage',compact('picdata','temp','picdata2'));
+  }
+    
+    
+    }
+
+    public function sendMessage(Request $request)
+    {
+      if(file_exists($request->file('Files5'))){}
+          else{
+      $request->validate(
+        [
+          
+           'PsyMessage'=>'required'
+          // 'Files4'=> 'required | mimes:jpg,png,jpeg,mp4,m4v,pdf,xls,txt,docx,ppt'
+        
+        ]
+        );
+      }
+      
+      //$files = $request->file('Files5');
+       // $fileName=time().'.'.$files->extension();
+      //  $files->move(public_path('images'),$fileName);
+
+      $data=new Message;
+      $data->Read2='0';
+      if(file_exists($request->file('Files5'))){
+        $data->Read2='1';
+        $files = $request->file('Files5');
+        $fileName=time().'.'.$files->extension();
+        $files->move(public_path('uploads'),$fileName);
+        $data->Files=$fileName;
+      }
+
+      $PsyMessage=$request->input('PsyMessage');
+
+      
+      $data->PsyUsername=$request->session()->get('user2');
+      $data->PsyName = Psychologist::where('Username',$data->PsyUsername)->first()->Name;
+      $data->PtUsername=$request->input('PtUsername');
+      $data->PtName = Patient::where('Username',$data->PtUsername)->first()->Name;
+      $data->PsyMessage=$PsyMessage;
+      $data->Read1='1';
+     
+      $data->save();
+
+      return redirect('psyMessages');
+
+    }
+
+
 }

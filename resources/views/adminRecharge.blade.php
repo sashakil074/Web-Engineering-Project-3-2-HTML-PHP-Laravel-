@@ -95,11 +95,13 @@ td{
     </style>
 <br>
 <br>
+<div>
 @if(Session::get('recharge_success'))
   <div class="alert alert-success">
     {{Session::get('recharge_success')}}
     </div>
     @endif
+</div>
     <br>
 <h1 style="text-align:center">Recharge Requests</h1>
 

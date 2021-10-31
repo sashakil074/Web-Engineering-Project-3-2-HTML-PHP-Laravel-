@@ -129,7 +129,7 @@ td{
           <td>{{$data->Name}} </td>
           <td>{{$data->Position}}</td>
           <td>{{$data->Work_place}}</td>
-          <td><a href="/patientMessages" style="color:blue">Contact</a></td>
+          <td><a href="/patientOpenMessage/{{$data->Username}}" style="color:blue">Contact</a></td>
          
         </tr>
       </tbody>

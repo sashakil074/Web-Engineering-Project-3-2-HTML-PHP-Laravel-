@@ -2,18 +2,36 @@
 @section('title')
 Home
 @stop
-
+@section('psynavitem')
+<li><a class="menu active" href="/psyhome" >Home</a></li>
+	 <li><a class="menu " href="/psyaddarticle">Add Articles</a></li>
+		<li><a class="menu" href="/psycourses">Courses </a></li>
+		<li><a class="menu" href="/psyaddcourse">Add Course</a></li>
+		<li><a class="menu" href="/psyMessages"> Messages</a></li>
+		<li>
+		<div class="dropdown">
+     <button class="dropbtn">{{session('user2')}}</button>
+     <div class="dropdown-content">
+     <a href="/psyprofile">Profile</a>
+    <a href="/psyProfileSetting">Setting</a>
+     <a href="/logout2">Logout</a>
+    </div>
+    </div>
+		</li>
+@stop
 @section('content')
 
 
 
 <h1 style="text-align:center">My Articles</h1>
 
+<div>
 @if(Session::get('article_deleted'))
   <div class="alert alert-success">
     {{Session::get('article_deleted')}}
     </div>
     @endif
+</div>
 <br>
 @foreach($articledata as $data)
 @if(session('user2')==$data->Username)

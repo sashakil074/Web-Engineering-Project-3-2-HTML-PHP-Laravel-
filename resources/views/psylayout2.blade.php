@@ -48,21 +48,7 @@
 					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					      
 					      <ul class="nav navbar-nav navbar-right">
-					        <li><a class="menu active" href="/psyhome" >Home</a></li>
-					        <li><a class="menu " href="/psyaddarticle">Add Articles</a></li>
-					        <li><a class="menu" href="/psycourses">Courses </a></li>
-					        <li><a class="menu" href="/psyaddcourse">Add Course</a></li>
-					        <li><a class="menu" href="/psyMessages"> Messages</a></li>
-							<li>
-							<div class="dropdown">
-                            <button class="dropbtn">{{session('user2')}}</button>
-                            <div class="dropdown-content">
-                            <a href="/psyprofile">Profile</a>
-                            <a href="/psyProfileSetting">Setting</a>
-                            <a href="/logout2">Logout</a>
-                            </div>
-                            </div>
-							</li>
+						  @yield('psynavitem2')
 					      </ul>
 					    </div><!-- /navbar-collapse -->
 					  </div><!-- / .container-fluid -->
@@ -87,15 +73,15 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12 col-md-3">
-		  <h6><a href="#">About Us</a></h6>
+		  <h6><a href="/about">About Us</a></h6>
           </div>
 
           <div class="col-xs-6 col-md-3">
-            <h6><a href="#">Contact Us</a></h6>
+            <h6><a href="/contact">Contact Us</a></h6>
           </div>
 
           <div class="col-xs-6 col-md-3">
-		  <h6> <h6><a href="#">Support</a></h6></h6>
+		  <h6> <h6><a href="/faq">FAQ</a></h6></h6>
 		  </div>
 		  
           <div class="col-xs-6 col-md-3">

@@ -45,11 +45,14 @@ input[type=submit]:hover {
 
 }
 </style>
+<br>
+<div>
 @if(Session::get('feedback_given'))
   <div class="alert alert-success">
     {{Session::get('feedback_given')}}
     </div>
     @endif
+</div>
     <br>
 <br>
 <br>

@@ -2,446 +2,85 @@
 @section('title2')
 Contact Psychologist
 @stop
-
-@section('content3')
-<style>
-
-*{
-	box-sizing:border-box;
-}
-body{
-	background-color:#abd9e9;
-	
-}
-#container{
-	width:750px;
-	height:800px;
-	background:#eff3f7;
-	margin:0 auto;
-	font-size:0;
-	border-radius:5px;
-	overflow:hidden;
-}
-aside{
-	width:260px;
-	height:800px;
-	background-color:#3b3e49;
-	display:inline-block;
-	font-size:15px;
-	vertical-align:top;
-}
-main{
-	width:490px;
-	height:800px;
-	display:inline-block;
-	font-size:15px;
-	vertical-align:top;
-}
-
-aside header{
-	padding:30px 20px;
-}
-aside input{
-	width:100%;
-	height:50px;
-	line-height:50px;
-	padding:0 50px 0 20px;
-	background-color:#5e616a;
-	border:none;
-	border-radius:3px;
-	color:#fff;
-	background-image:url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_search.png);
-	background-repeat:no-repeat;
-	background-position:170px;
-	background-size:40px;
-}
-aside input::placeholder{
-	color:#fff;
-}
-aside ul{
-	padding-left:0;
-	margin:0;
-	list-style-type:none;
-	overflow-y:scroll;
-	height:690px;
-}
-aside li{
-	padding:10px 0;
-}
-aside li:hover{
-	background-color:#5e616a;
-}
-h2,h3{
-	margin:0;
-}
-aside li img{
-	border-radius:50%;
-	margin-left:20px;
-	margin-right:8px;
-}
-aside li div{
-	display:inline-block;
-	vertical-align:top;
-	margin-top:12px;
-}
-aside li h2{
-	font-size:14px;
-	color:#fff;
-	font-weight:normal;
-	margin-bottom:5px;
-}
-aside li h3{
-	font-size:12px;
-	color:#7e818a;
-	font-weight:normal;
-}
-
-.status{
-	width:8px;
-	height:8px;
-	border-radius:50%;
-	display:inline-block;
-	margin-right:7px;
-}
-.green{
-	background-color:#58b666;
-}
-.orange{
-	background-color:#ff725d;
-}
-.blue{
-	background-color:#6fbced;
-	margin-right:0;
-	margin-left:7px;
-}
-
-main header{
-	height:110px;
-	padding:30px 20px 30px 40px;
-}
-main header > *{
-	display:inline-block;
-	vertical-align:top;
-}
-main header img:first-child{
-	border-radius:50%;
-}
-main header img:last-child{
-	width:24px;
-	margin-top:8px;
-}
-main header div{
-	margin-left:10px;
-	margin-right:145px;
-}
-main header h2{
-	font-size:16px;
-	margin-bottom:5px;
-}
-main header h3{
-	font-size:14px;
-	font-weight:normal;
-	color:#7e818a;
-}
-
-#chat{
-	padding-left:0;
-	margin:0;
-	list-style-type:none;
-	overflow-y:scroll;
-	height:535px;
-	border-top:2px solid #fff;
-	border-bottom:2px solid #fff;
-}
-#chat li{
-	padding:10px 30px;
-}
-#chat h2,#chat h3{
-	display:inline-block;
-	font-size:13px;
-	font-weight:normal;
-}
-#chat h3{
-	color:#bbb;
-}
-#chat .entete{
-	margin-bottom:5px;
-}
-#chat .message{
-	padding:20px;
-	color:#fff;
-	line-height:25px;
-	max-width:90%;
-	display:inline-block;
-	text-align:left;
-	border-radius:5px;
-}
-#chat .me{
-	text-align:right;
-}
-#chat .you .message{
-	background-color:#58b666;
-}
-#chat .me .message{
-	background-color:#6fbced;
-}
-#chat .triangle{
-	width: 0;
-	height: 0;
-	border-style: solid;
-	border-width: 0 10px 10px 10px;
-}
-#chat .you .triangle{
-		border-color: transparent transparent #58b666 transparent;
-		margin-left:15px;
-}
-#chat .me .triangle{
-		border-color: transparent transparent #6fbced transparent;
-		margin-left:375px;
-}
-
-main footer{
-	height:155px;
-	padding:20px 30px 10px 20px;
-}
-main footer textarea{
-	resize:none;
-	border:none;
-	display:block;
-	width:100%;
-	height:80px;
-	border-radius:3px;
-	padding:20px;
-	font-size:13px;
-	margin-bottom:13px;
-}
-main footer textarea::placeholder{
-	color:#ddd;
-}
-main footer img{
-	height:30px;
-	cursor:pointer;
-}
-main footer a{
-	text-decoration:none;
-	text-transform:uppercase;
-	font-weight:bold;
-	color:#6fbced;
-	vertical-align:top;
-	margin-left:333px;
-	margin-top:5px;
-	display:inline-block;
-}
-</style>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div id="container">
-	<aside>
-		<header>
-			<input type="text" placeholder="search">
-		</header>
-		<ul>
-			<li>
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
-				<div>
-					<h2>Prénom Nom</h2>
-					<h3>
-						<span class="status orange"></span>
-						offline
-					</h3>
-				</div>
-			</li>
-			<li>
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_02.jpg" alt="">
-				<div>
-					<h2>Prénom Nom</h2>
-					<h3>
-						<span class="status green"></span>
-						online
-					</h3>
-				</div>
-			</li>
-			<li>
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_03.jpg" alt="">
-				<div>
-					<h2>Prénom Nom</h2>
-					<h3>
-						<span class="status orange"></span>
-						offline
-					</h3>
-				</div>
-			</li>
-			<li>
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_04.jpg" alt="">
-				<div>
-					<h2>Prénom Nom</h2>
-					<h3>
-						<span class="status green"></span>
-						online
-					</h3>
-				</div>
-			</li>
-			<li>
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_05.jpg" alt="">
-				<div>
-					<h2>Prénom Nom</h2>
-					<h3>
-						<span class="status orange"></span>
-						offline
-					</h3>
-				</div>
-			</li>
-			<li>
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_06.jpg" alt="">
-				<div>
-					<h2>Prénom Nom</h2>
-					<h3>
-						<span class="status green"></span>
-						online
-					</h3>
-				</div>
-			</li>
-			<li>
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_07.jpg" alt="">
-				<div>
-					<h2>Prénom Nom</h2>
-					<h3>
-						<span class="status green"></span>
-						online
-					</h3>
-				</div>
-			</li>
-			<li>
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_08.jpg" alt="">
-				<div>
-					<h2>Prénom Nom</h2>
-					<h3>
-						<span class="status green"></span>
-						online
-					</h3>
-				</div>
-			</li>
-			<li>
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_09.jpg" alt="">
-				<div>
-					<h2>Prénom Nom</h2>
-					<h3>
-						<span class="status green"></span>
-						online
-					</h3>
-				</div>
-			</li>
-			<li>
-				<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_10.jpg" alt="">
-				<div>
-					<h2>Prénom Nom</h2>
-					<h3>
-						<span class="status orange"></span>
-						offline
-					</h3>
-				</div>
-			</li>
-		</ul>
-	</aside>
-	<main>
-		<header>
-			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/chat_avatar_01.jpg" alt="">
-			<div>
-				<h2>Chat with Vincent Porter</h2>
-				<h3>already 1902 messages</h3>
-			</div>
-			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_star.png" alt="">
-		</header>
-		<ul id="chat">
-			<li class="you">
-				<div class="entete">
-					<span class="status green"></span>
-					<h2>Vincent</h2>
-					<h3>10:12AM, Today</h3>
-				</div>
-				<div class="triangle"></div>
-				<div class="message">
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-				</div>
-			</li>
-			<li class="me">
-				<div class="entete">
-					<h3>10:12AM, Today</h3>
-					<h2>Vincent</h2>
-					<span class="status blue"></span>
-				</div>
-				<div class="triangle"></div>
-				<div class="message">
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-				</div>
-			</li>
-			<li class="me">
-				<div class="entete">
-					<h3>10:12AM, Today</h3>
-					<h2>Vincent</h2>
-					<span class="status blue"></span>
-				</div>
-				<div class="triangle"></div>
-				<div class="message">
-					OK
-				</div>
-			</li>
-			<li class="you">
-				<div class="entete">
-					<span class="status green"></span>
-					<h2>Vincent</h2>
-					<h3>10:12AM, Today</h3>
-				</div>
-				<div class="triangle"></div>
-				<div class="message">
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-				</div>
-			</li>
-			<li class="me">
-				<div class="entete">
-					<h3>10:12AM, Today</h3>
-					<h2>Vincent</h2>
-					<span class="status blue"></span>
-				</div>
-				<div class="triangle"></div>
-				<div class="message">
-					Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-				</div>
-			</li>
-			<li class="me">
-				<div class="entete">
-					<h3>10:12AM, Today</h3>
-					<h2>Vincent</h2>
-					<span class="status blue"></span>
-				</div>
-				<div class="triangle"></div>
-				<div class="message">
-					OK
-				</div>
-			</li>
-		</ul>
-		<footer>
-			<textarea placeholder="Type your message"></textarea>
-			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="">
-			<img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png" alt="">
-			<a href="#">Send</a>
-		</footer>
-	</main>
+@section('navitem2')
+<li><a class="menu " href="/patienthome" >Home</a></li>
+ <li><a class="menu " href="/patientcourses">Courses</a></li>
+ <li><a class="menu" href="/patientPsyList">Psychologists </a></li>
+ <li><a class="menu" href="/patientSearchPsy">Search Psychologists</a></li>
+ <li><a class="menu active" href="/patientMessages">Contact Psychologists</a></li>
+ <li>
+ <div class="dropdown">
+ <button class="dropbtn">{{session('user')}}</button>
+  <div class="dropdown-content">
+ <a href="/patientprofile">Profile</a>
+<a href="/patientProfileSetting">Setting</a>
+<a href="/logout">Logout</a>
+ </div>
 </div>
+ </li>
+@stop
+@section('content3')
+<link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' type='text/css'>
+  <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" ></script>
+  <link href='https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js' rel='stylesheet' type='text/css'>
+  <link href='https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css' rel='stylesheet' type='text/css'>
+
 <br>
 <br>
 <br>
 <br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
+@if( $Msgdata=="0")
+
+<div class="py-10 h-screen bg-gray-300 px-2">
+ <div class="max-w-md mx-auto bg-gray-100 shadow-lg rounded-lg overflow-hidden md:max-w-lg">
+        <div class="md:flex">
+            <div class="w-full p-4">
+                <div class="relative"> <a href="/patientSearchPsy" class="w-full h-12 rounded focus:outline-none px-3 focus:shadow-md"> <i class="fa fa-search absolute right-3 top-4 text-gray-300">Search...</i></a> </div>
+                <br>
+                <br>
+                <h1 style="text-align: center">No Messages</h1>
+                <br>
+                <br>
+                <ul>
+                <div class="flex flex-col ml-2"> <span class="text-sm text-gray-400 truncate w-32">No Message History</span> </div>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div> 
+@else
+
+
+   <div class="py-10 h-screen bg-gray-300 px-2">
+   <h1 style="text-align: center">All Messages</h1>
+    <div class="max-w-md mx-auto bg-gray-100 shadow-lg rounded-lg overflow-hidden md:max-w-lg">
+        <div class="md:flex">
+            <div class="w-full p-4">
+            <div class="relative"> <a href="/patientSearchPsy" class="w-full h-12 rounded focus:outline-none px-3 focus:shadow-md"> <i class="fa fa-search absolute right-3 top-4 text-gray-300">Search...</i></a> </div>
+                <ul>
+                @foreach($Msgdata as $data)
+                    <li class="flex justify-between items-center bg-white mt-2 p-2 hover:shadow-lg rounded cursor-pointer transition" onclick="location.href = '/patientOpenMessage/{{$data->PsyUsername}}';">
+                        <div class="flex ml-2"> <img src="{{asset('images')}}/{{$data->ProfilePic}}" width="40" height="40" class="rounded-full">
+                            <div class="flex flex-col ml-2"> <span class="font-medium text-black">{{$data->PsyName}}</span> <span class="text-sm text-gray-400 truncate w-32">{{$data->PsyMessage}}</span> </div>
+                        </div>
+                        <div class="flex flex-col items-center"> <span class="text-gray-300">{{$data->created_at}}</span> <i class="fa fa-star text-green-400"></i> </div>
+                    </li>
+                    @endforeach	
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+@endif
+
+
 @stop

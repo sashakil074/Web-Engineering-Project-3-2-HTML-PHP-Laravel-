@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Feedbacks</title>
+  <title>About us</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -67,11 +67,17 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-        <li><a href="/index">Index</a></li>
-          <li><a href="/about">About</a></li>
+        @if(!empty(Session::get('user')))
+        <li> <a href="/patienthome">Home</a></li>
+       @elseif(!empty(Session::get('user2')))
+       <li><a href="/psyhome">Home</a></li>
+       @else
+       <li class="inactive"><a href="/index">Index</a></li>
+    @endif
+          <li class="active"><a href="/about">About</a></li>
           <li><a href="/contact">Contact</a></li>
           <li><a href="/faq">FAQ</a></li>
-         <li class="active"><a href="/all_feedbacks">Feedbacks</a></li>
+         <li><a href="/all_feedbacks">Feedbacks</a></li>
           <li><a href="/tac">Terms and Conditions</a></li>
           <li><a href="/pp">Privacy Policy</a></li>
           </nav>
@@ -84,103 +90,108 @@
     <br>
     <br>
     <br>
-    <style>
+    <!-- ======= About Section ======= -->
+    <section id="about" class="about">
+      <div class="container-fluid">
 
-/* Style inputs with type="text", select elements and textareas */
-input[type=text], select, textarea {
-  width: 100%; /* Full width */
-  padding: 5px; /* Some padding */ 
-  border: 1px solid #ccc; /* Gray border */
-  border-radius: 4px; /* Rounded borders */
-  box-sizing: border-box; /* Make sure that padding and width stays in place */
-  margin-top: 6px; /* Add a top margin */
-  margin-bottom: 16px; /* Bottom margin */
-  max-height:60px;
-  resize: vertical /* Allow the user to vertically resize the textarea (not horizontally) */
-}
+        <div class="row">
+         <div class="col-xl-5 col-lg-6 video-box d-flex justify-content-center align-items-stretch">
+       <!--  <a src="/index_img/index_video.mp4" class="venobox play-btn mb-4" data-vbtype="video" data-autoplay="true">
+    
+      </a>-->
+      <video width="600" min-height="500"  controls>
+  <source src="/index_img/index_video.mp4" type="video/mp4">
 
-/* Style the submit button with a specific background color etc */
-input[type=submit] {
-  background-color: #4CAF50;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
+   </video>
+          </div>
 
-/* When moving the mouse over the submit button, add a darker green color */
-input[type=submit]:hover {
-  background-color: #45a049;
-}
+          <div class="col-xl-7 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+            <h3>About E-health Care System for Mental Health Problems</h3>
+            <p>“E-Health Care System for Mental Health Problems” is a web  application.
+                developed to prevent mental health
+                problems like depression,anxiety and remove suicide like social problems from our society.
+                Mental Health problems are the main reasons of this social burden(suicide).
+                So the main objective of this web application is to remove these problems from our society.
+            </p>
 
-/* Add a background color and some padding around the form */
-.containerf {
-  border-radius: 2px;
-  background-color: #41DBAB;
-  opacity: 80%;
-  padding: 10px;
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-fingerprint"></i></div>
+              <h4 class="title"><p></p>Secure</h4>
+              <p class="description">This is a secure web platform where user privacy are fully protected.</p>
+            </div>
 
-}
-</style>
-<br>
-<br>
-<br>
-<br>
-<div>
-@if(Session::get('feedback_given'))
-  <div class="alert alert-success">
-    {{Session::get('feedback_given')}}
-    </div>
-    @endif
-</div>
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-gift"></i></div>
+              <h4 class="title"><p>Effective Treatments</p></h4>
+              <p class="description">Our site provides the best and effective treatments for mental health problems.</p>
+            </div>
+
+            <div class="icon-box">
+              <div class="icon"><i class="bx bx-atom"></i></div>
+              <h4 class="title"><p>Best Results</p></h4>
+              <p class="description">Our services like articles,courses and consultation with psychologists
+                 gives the best results for mental health problems.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Section -->
     <br>
-<br>
+    <br>
+    <!-- ======= Counts Section ======= -->
+    <section id="counts" class="counts">
+      <div class="container">
 
-<br>
-<br>
-<h1 style="text-align:center">Feedbacks</h1>
-<div class="container" style="border-style:none;background:grey" >
+        <div class="row">
 
-<br>
-<br>
-@foreach($feedbackdata as $data)
-<div class="container article" style="max-width:1000px;border-style:inset;border-width:2px;">
-<h4  style="padding-left:90px; text-transform: uppercase;color: #fff;">
-{{$data->Name}}
-</h4>
-<p style="padding-left:90px;color: #fff;" id="datetime">{{$data->Status}}</p>
+          <div class="col-lg-3 col-md-6">
+            <div class="count-box">
+              <i class="icofont-doctor-alt"></i>
+              <span data-toggle="counter-up">50</span>
+              <p>Doctors</p>
+            </div>
+          </div>
 
-<p style="padding-left:90px;font-size: 20px;color: #fff;">{{$data->Feedback}}</p>
-</div>
-<br>
-<br>
+          <div class="col-lg-3 col-md-6 mt-5 mt-md-0">
+            <div class="count-box">
+              <i class="icofont-patient-bed"></i>
+              <span data-toggle="counter-up">60</span>
+              <p>Courses</p>
+            </div>
+          </div>
 
-@endforeach
-<br>
-<br>
-<div div class="containerf" style="border-style:groove;">
-<h1 style="text-align:center">Give Feedback</h1>
-  <form action="{{route('visitor.feedback')}}" method="post">
-   @csrf
-    <label > Name</label>
-    <input type="text"  name="Name" placeholder="Your name..">
-    <label > Email</label>
-    <input type="text"  name="Email" placeholder="Your Email..">
-    <label >Write Your Feedbacks</label>
-    <textarea  name="Feedback" placeholder="Write something.." style="height:200px"></textarea>
+          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+            <div class="count-box">
+              <i class="icofont-money"></i>
+              <span data-toggle="counter-up">150</span>
+              <p>Starting Course Price(TK) </p>
+            </div>
+          </div>
 
-    <button type="submit" class="btn btn-success"  style=" background-color: green;">Submit</button>
+          <div class="col-lg-3 col-md-6 mt-5 mt-lg-0">
+            <div class="count-box">
+              <i class="icofont-award"></i>
+              <span data-toggle="counter-up">30</span>
+              <p>Awards</p>
+            </div>
+          </div>
 
-  </form>
-</div>
-<br>
-<br>
-</div>
-<br>
-<br>
-<br>
-<br>
+        </div>
+
+      </div>
+    </section><!-- End Counts Section -->
+  
+    @if(!empty(Session::get('user')))
+    <a href="/patienthome">Home</a>
+       @elseif(!empty(Session::get('user2')))
+      <a href="/psyhome">Home</a>
+       @else
+       <h1>Works</h1>
+    @endif
+               
+  
 </main>
 
   <!-- ======= Footer ======= -->

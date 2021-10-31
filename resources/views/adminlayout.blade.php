@@ -84,15 +84,15 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-12 col-md-3">
-		  <h6><a href="#">About Us</a></h6>
+		  <h6><a href="/about">About Us</a></h6>
           </div>
 
           <div class="col-xs-6 col-md-3">
-            <h6><a href="#">Contact Us</a></h6>
+            <h6><a href="/contact">Contact Us</a></h6>
           </div>
 
           <div class="col-xs-6 col-md-3">
-		  <h6> <h6><a href="#">Support</a></h6></h6>
+		  <h6> <h6><a href="/faq">FAQ</a></h6></h6>
 		  </div>
 		  
           <div class="col-xs-6 col-md-3">

@@ -47,12 +47,24 @@ class PatientRegController extends Controller
       $cardData->CardNo=$request->input('NID_no');
       $cardData->Balance='0';
 
+      if(Patient::where('NID_no', $data->NID_no)->exists()){
+        return back()->with('error2','This NID number already exists,try another!');
+      }
+      else if(Patient::where('Username', $data->Username)->exists())
+      {
+        return back()->with('error2','This username already exists,try another!');
+      }
+      else if(Patient::where('Username', $data->Username)->exists())
+      {
+        return back()->with('error2','This email already exists,try another!');
+      }
+      else
+      {
       $data->save();
       $cardData->save();
 
-
-
       $request->session()->flash('status1','Patient Registration Successful');
       return redirect('patientlogin');
-    }
+      }
+}
 }
