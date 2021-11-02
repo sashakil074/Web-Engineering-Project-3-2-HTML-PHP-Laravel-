@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Hash;
 use App\Models\Article;
 use App\Models\Psychologist;
 use App\Models\Patient;
@@ -15,173 +17,201 @@ use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
-    //
-    public function adminLogin(Request $request)
-    {
-      // return $request->input(); 
+  //
+  public function adminLogin(Request $request)
+  {
+    // return $request->input(); 
 
-      $request->validate(
-        [
-           
-         'Username'=>'required' ,
-        'Password'=>'required',
-        ]
-        );
-     $logindata=$request->input();
-      
-     $data1=$request->input('Username');
+    $request->validate(
+      [
 
-   if(Admin::where('Username' , $data1)->doesntExist())
-   {
-    $request->session()->flash('status','Wrong Username');
-     return redirect('adminLogin');
-   }
-   else{
-   
-     $data=Admin::where('Username',$request->input('Username'))->first();
+        'Username' => 'required',
+        'Password' => 'required',
+      ]
+    );
+    $logindata = $request->input();
 
-     if($request->input('Password')==$data->Password){
-     $request->session()->put('admin',$logindata['Username']);
-     return redirect('adminAllPatients');
-     }
-     else
-     {
-      $request->session()->flash('status','Wrong Password');
+    $data1 = $request->input('Username');
+
+    if (Admin::where('Username', $data1)->doesntExist()) {
+      $request->session()->flash('status', 'Wrong Username');
       return redirect('adminLogin');
-     }
+    } else {
+
+      $data = Admin::where('Username', $request->input('Username'))->first();
+
+      if (Hash::check($request->input('Password'), $data->Password)) {
+        $request->session()->put('admin', $logindata['Username']);
+        return redirect('adminAllPatients');
+      } else {
+        $request->session()->flash('status', 'Wrong Password');
+        return redirect('adminLogin');
+      }
     }
+  }
 
+  public function showPatients()
+  {
+    $userdata = Patient::all();
+
+    return view('adminAllPatients', compact('userdata'));
+  }
+
+  public function showPsychologists()
+  {
+    $userdata = Psychologist::all();
+
+    return view('adminAllPsychologists', compact('userdata'));
+  }
+
+  public function showCourse()
+  {
+    $coursedata = Course::all();
+
+
+    return view('adminCourses', compact('coursedata'));
+  }
+
+  public function deletePatient($id)
+  {
+    $data = Patient::find($id);
+
+    if ($data->ProfilePic != null) {
+      unlink(public_path('images') . '/' . $data->ProfilePic);
+
+
+      $data->delete();
+
+      return back()->with('patient_deleted', 'Patient deleted successfully');
+    } else {
+      $data->delete();
+
+      return back()->with('patient_deleted', 'Patient deleted successfully');
     }
+  }
 
-    public function showPatients()
-    {
-     $userdata=Patient::all();
+  public function deletePsychologist($id)
+  {
+    $data = Psychologist::find($id);
 
-    return view('adminAllPatients',compact('userdata'));
+    if ($data->ProfilePic != null) {
+      unlink(public_path('images') . '/' . $data->ProfilePic);
+
+      $data->delete();
+
+      return back()->with('psy_deleted', 'Psychologist deleted successfully');
+    } else {
+      $data->delete();
+
+      return back()->with('psy_deleted', 'Psychologist deleted successfully');
     }
+  }
 
-    public function showPsychologists()
-    {
-     $userdata=Psychologist::all();
+  public function deleteCourse($id)
+  {
+    $data = Course::find($id);
 
-    return view('adminAllPsychologists',compact('userdata'));
-    }
+    unlink(public_path('images') . '/' . $data->Files);
 
-    public function showCourse()
-    {
-     $coursedata=Course::all();
-    
+    $data->delete();
 
-    return view('adminCourses',compact('coursedata'));
-    }
+    return back()->with('Course_deleted', 'Course deleted successfully');
+  }
 
-    public function deletePatient($id)
-    {
-     $data=Patient::find($id);
+  public function viewAdminProfile(Request $request)
+  {
+    $admindata = Admin::where('Username', $request->session()->get('admin'))
+      ->get('*');
 
-     unlink(public_path('images').'/'.$data->ProfilePic);
-     
-     $data->delete();
+    return view('adminprofile', compact('admindata'));
+  }
 
-     return back()->with('patient_deleted','Patient deleted successfully');
-    }
+  public function viewAdminProfileSetting(Request $request)
+  {
+    $admindata = Admin::where('Username', $request->session()->get('admin'))
+      ->get('*');
 
-    public function deletePsychologist($id)
-    {
-     $data=Psychologist::find($id);
+    return view('adminProfileSetting', compact('admindata'));
+  }
 
-     unlink(public_path('images').'/'.$data->ProfilePic);
-     
-     $data->delete();
-
-     return back()->with('psy_deleted','Psychologist deleted successfully');
-    }
-
-    public function deleteCourse($id)
-    {
-     $data=Course::find($id);
-
-     unlink(public_path('images').'/'.$data->Files);
-     
-     $data->delete();
-
-     return back()->with('Course_deleted','Course deleted successfully');
-    }
-
-    public function viewAdminProfile(Request $request)
-    {
-        $admindata=Admin::where('Username',$request->session()->get('admin'))
-        ->get('*');
-        
-        return view('adminprofile',compact('admindata'));
-    }
-
-    public function viewAdminProfileSetting(Request $request)
-    {
-        $admindata=Admin::where('Username',$request->session()->get('admin'))
-        ->get('*');
-
-        return view('adminProfileSetting',compact('admindata'));
-    }
-
-    public function updateProfile(Request $request)
-    {
+  public function updateProfile(Request $request)
+  {
+    if (file_exists($request->file('ProfilePic'))) {
       $image = $request->file('ProfilePic');
-        $imageName=time().'.'.$image->extension();
-        $image->move(public_path('images'),$imageName);
+      $imageName = time() . '.' . $image->extension();
+      $image->move(public_path('images'), $imageName);
 
-      $Name=$request->input('Name');
-      $NID_no=$request->input('NID_no');
-      $Division=$request->input('Division');
-      $Email=$request->input('Email');
-      $Contact=$request->input('Contact');
-      $Password=$request->input('Password');
+      $Name = $request->input('Name');
+      $NID_no = $request->input('NID_no');
+      $Division = $request->input('Division');
+      $Email = $request->input('Email');
+      $Contact = $request->input('Contact');
+      $Password = Hash::make($request->input('Password'));
 
-      $data=Admin::find($request->id);
-      $data->Name=$Name;
-      $data->NID_no=$NID_no;
-      $data->Division=$Division;
-      $data->Email=$Email;
-      $data->Contact=$Contact;
-      $data->Password=$Password;
-      $data->ProfilePic=$imageName;
+      $data = Admin::find($request->id);
+      $data->Name = $Name;
+      $data->NID_no = $NID_no;
+      $data->Division = $Division;
+      $data->Email = $Email;
+      $data->Contact = $Contact;
+      $data->Password = $Password;
+      $data->ProfilePic = $imageName;
 
       $data->save();
-     
 
-      return back()->with('Profile_Updated','Profile Updated successfully');
 
+      return back()->with('Profile_Updated', 'Profile Updated successfully');
+    } else {
+      $Name = $request->input('Name');
+      $NID_no = $request->input('NID_no');
+      $Division = $request->input('Division');
+      $Email = $request->input('Email');
+      $Contact = $request->input('Contact');
+      $Password = Hash::make($request->input('Password'));
+
+      $data = Admin::find($request->id);
+      $data->Name = $Name;
+      $data->NID_no = $NID_no;
+      $data->Division = $Division;
+      $data->Email = $Email;
+      $data->Contact = $Contact;
+      $data->Password = $Password;
+      //$data->ProfilePic = $imageName;
+
+      $data->save();
+
+
+      return back()->with('Profile_Updated', 'Profile Updated successfully');
     }
+  }
 
-    public function showRechargeRequests(Request $request)
-    {
-        $rechargedata=Recharge::where('Status','0')
-        ->get('*');
+  public function showRechargeRequests(Request $request)
+  {
+    $rechargedata = Recharge::where('Status', '0')
+      ->get('*');
 
-        return view('adminRecharge',compact('rechargedata'));
-    }
+    return view('adminRecharge', compact('rechargedata'));
+  }
 
-    public function rechargeCard($id)
-    {
-     $data=Recharge::find($id);
-      $carddata=Card::where('CardNo',$data->Card_no)->first();
+  public function rechargeCard($id)
+  {
+    $data = Recharge::find($id);
+    $carddata = Card::where('CardNo', $data->Card_no)->first();
 
-      $carddata->Balance=$carddata->Balance+$data->Amount;
-      $data->Status='1';
-     $data->save();
-     $carddata->save();
+    $carddata->Balance = $carddata->Balance + $data->Amount;
+    $data->Status = '1';
+    $data->save();
+    $carddata->save();
 
-     return back()->with('recharge_success','Card Recharge Successfull');
-    }
+    return back()->with('recharge_success', 'Card Recharge Successfull');
+  }
 
-    
-    public function showFeedbacks()
-    {
-     $feedbackdata=Feedback::all();
-    
 
-    return view('adminfeedback',compact('feedbackdata'));
-    }
+  public function showFeedbacks()
+  {
+    $feedbackdata = Feedback::all();
 
-    
+
+    return view('adminfeedback', compact('feedbackdata'));
+  }
 }

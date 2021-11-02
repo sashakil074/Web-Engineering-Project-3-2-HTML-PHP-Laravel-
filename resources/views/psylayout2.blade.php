@@ -1,117 +1,132 @@
 <!DOCTYPE html>
-<html lang="en"> 
+<html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0" name="viewport">
 	<title>@yield('title2')</title>
+
+	<meta content="" name="description">
+	<meta content="" name="keywords">
+
+	<!-- Favicons -->
 	<link href="/img/logo.png" rel="icon">
+	<link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 	<link rel="stylesheet" href="/css/font-awesome.min.css">
 	<link rel="stylesheet" href="/css/bootstrap.min.css">
 	<link rel="stylesheet" href="/css/style.css">
-	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,800,700,300' rel='stylesheet' type='text/css'>
-	<link href='http://fonts.googleapis.com/css?family=BenchNine:300,400,700' rel='stylesheet' type='text/css'>
-	<script src="/js/modernizr.js"></script>
-	<!--[if lt IE 9]>
-      <script src="js/html5shiv.js"></script>
-      <script src="js/respond.min.js"></script>
-    <![endif]-->
 
+	<!-- Google Fonts -->
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<script src="/js/modernizr.js"></script>
+	<!-- Vendor CSS Files -->
+	<link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/vendor/icofont/icofont.min.css" rel="stylesheet">
+	<link href="/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+	<link href="/vendor/venobox/venobox.css" rel="stylesheet">
+	<link href="/vendor/animate.css/animate.min.css" rel="stylesheet">
+	<link href="/vendor/remixicon/remixicon.css" rel="stylesheet">
+	<link href="/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
+	<link href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+
+	<!-- Template Main CSS File -->
+	<link href="/css/style2.css" rel="stylesheet">
 </head>
+
 <body>
-	
+
+
 	<!-- ====================================================
 	header section -->
-	<header class="top-header">
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-5 header-logo">
-					<br>
-					<a href="/psyhome"><img src="{{asset('img')}}/logo.png"  alt="" class="img-responsive logo"></a>
-				</div>
-
-				<div class="col-md-7">
-					<nav class="navbar navbar-default">
-					  <div class="container-fluid nav-bar">
-					    <!-- Brand and toggle get grouped for better mobile display -->
-					    <div class="navbar-header">
-					      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-					        <span class="sr-only">Toggle navigation</span>
-					        <span class="icon-bar"></span>
-					        <span class="icon-bar"></span>
-					        <span class="icon-bar"></span>
-					      </button>
-					    </div>
-
-					    <!-- Collect the nav links, forms, and other content for toggling -->
-					    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-					      
-					      <ul class="nav navbar-nav navbar-right">
-						  @yield('psynavitem2')
-					      </ul>
-					    </div><!-- /navbar-collapse -->
-					  </div><!-- / .container-fluid -->
-					</nav>
-				</div>
+	<!-- ======= Top Bar ======= -->
+	<div id="topbar" class="d-none d-lg-flex align-items-center fixed-top">
+		<div class="container d-flex">
+			<div class="contact-info mr-auto">
+				<i class="icofont-envelope"></i> <a href="mailto:contact@example.com">shakil.ahammed074@gmail.com</a>
+				<i class="icofont-phone"></i> +8801766165877
+				<i class="icofont-google-map"></i> CSE-PUST,Rajapur,Pabna
 			</div>
+			<div class="social-links">
+				<a href="#" class="twitter"><i class="icofont-twitter"></i></a>
+				<a href="#" class="facebook"><i class="icofont-facebook"></i></a>
+				<a href="#" class="instagram"><i class="icofont-instagram"></i></a>
+				<a href="#" class="skype"><i class="icofont-skype"></i></a>
+				<a href="#" class="linkedin"><i class="icofont-linkedin"></i></i></a>
+			</div>
+		</div>
+	</div>
+
+	<!-- ======= Header ======= -->
+	<header id="header" class="fixed-top">
+		<div class="container d-flex align-items-center">
+
+			<h1 class="logo mr-auto"><a href="/index"><img src="{{asset('img')}}/logo.png" alt="" class="img-responsive logo"></a></h1>
+			<!-- Uncomment below if you prefer to use an image logo -->
+			<!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+			<nav class="nav-menu d-none d-lg-block">
+				<ul>
+					@yield('psynavitem2')
+				</ul>
+
+			</nav>
 		</div>
 	</header> <!-- end of header area -->
 
-	
 
 
+	@yield('content2')
 
-	 @yield('content2')
 
-	
 
 	<!-- footer starts here -->
-	 <!-- Site footer -->
-	 
-	 <footer class="site-footer">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-12 col-md-3">
-		  <h6><a href="/about">About Us</a></h6>
-          </div>
+	<!-- Site footer -->
 
-          <div class="col-xs-6 col-md-3">
-            <h6><a href="/contact">Contact Us</a></h6>
-          </div>
+	<footer class="site-footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-3">
+					<h6><a href="/about">About Us</a></h6>
+				</div>
 
-          <div class="col-xs-6 col-md-3">
-		  <h6> <h6><a href="/faq">FAQ</a></h6></h6>
-		  </div>
-		  
-          <div class="col-xs-6 col-md-3">
-		   <h6><a href="/psyfeedback">Feedbacks</a></h6>
-		   </div>
-        </div>
-        <hr>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-sm-6 col-xs-12">
-            <p style="text-align: left" class="copyright-text"> Copyright &copy;  All Rights Reserved by CSE PUST
-            </p>
-          </div>
-		  
-		  <div class="col-md-4 col-sm-6 col-xs-12">
-            <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
-            </ul>
-          </div>
+				<div class="col-xs-6 col-md-3">
+					<h6><a href="/contact">Contact Us</a></h6>
+				</div>
 
-        </div>
-	  </div>
-	  
+				<div class="col-xs-6 col-md-3">
+					<h6>
+						<h6><a href="/faq">FAQ</a></h6>
+					</h6>
+				</div>
 
-</footer>
+				<div class="col-xs-6 col-md-3">
+					<h6><a href="/psyfeedback">Feedbacks</a></h6>
+				</div>
+			</div>
+			<hr>
+		</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-sm-6 col-xs-12">
+					<p style="text-align: left" class="copyright-text"> Copyright &copy; All Rights Reserved by CSE PUST
+					</p>
+				</div>
 
-<!-- script tags
+				<div class="col-md-4 col-sm-6 col-xs-12">
+					<ul class="social-icons">
+						<li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+
+
+	</footer>
+
+	<!-- script tags
 	============================================================= -->
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
@@ -120,4 +135,5 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/custom.js"></script>
 </body>
+
 </html>

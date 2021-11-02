@@ -82,11 +82,25 @@ input[type=submit]:hover {
    @csrf
     <label > Name</label>
     <input type="text"  name="Name" placeholder="Your name..">
+    @if($errors->has('Name'))
+     <span class="text-danger">
+     <br> {{$errors->first('Name')}}
+    </span>
+     @endif
     <label > Email</label>
     <input type="text"  name="Email" placeholder="Your Email..">
+    @if($errors->has('Email'))
+     <span class="text-danger">
+     <br> {{$errors->first('Email')}}
+    </span>
+     @endif
     <label >Write Your Feedbacks</label>
     <textarea  name="Feedback" placeholder="Write something.." style="height:200px"></textarea>
-
+    @if($errors->has('Feedback'))
+     <span class="text-danger">
+     <br> {{$errors->first('Feedback')}}
+    </span>
+     @endif
     <button type="submit" class="btn btn-success"  style=" background-color: green;">Submit</button>
 
   </form>
