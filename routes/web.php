@@ -269,3 +269,6 @@ Route::view('faq', 'faq');
 
 Route::get('/all_feedbacks', [IndexController::class, 'showFeedbacks']);
 Route::post('all_feedbacks', [IndexController::class, 'addFeedbacks'])->name('visitor.feedback');
+
+
+Route::view('adminDashboard', 'adminDashboard');

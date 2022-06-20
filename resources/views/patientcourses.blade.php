@@ -66,49 +66,7 @@ Courses
   <p style="text-align:center"><strong>No Subscribed course</strong></p>
   <br>
 </div>
-@else
-<h2 style="text-align:center">My Subscribed Courses</h2>
-<br>
-@foreach($subdata as $data2)
 
-<div class="container article shadow-lg p-6 mb-3 bg-black rounded display: flex;justify-content: center; " style=" border-style:none;background: linear-gradient(to right, #25c481, #25b7c4);">
-  <br>
-  <h3 style="text-transform: uppercase;color:black;font-size: 25px;text-align:center">
-    {{$data2->CourseTitle}}
-  </h3>
-  <h3 style="text-transform: uppercase;color:black;font-size: 20px;color: #fff;text-align:center">
-    Course ID:{{$data2->CourseID}}
-  </h3>
-  <h3 style="color:black; font-size: 20px;color: #fff;text-align:center">
-    Course By:{{$data2->PsyName}}
-  </h3>
-  <p style="font-size: 20px;color: #fff;text-align:center">{{$data2->CourseDescription}}</p>
-
-  <img src="{{asset('images')}}/{{$data2->Files}}" style="max-width:95vh;margin-left:auto;margin-right:auto;display:block" />
-
-  <br>
-  <br>
-  <br>
-
-  <div class="">
-
-    <h3 style="font-size: 20px;color: #fff;text-align:center">
-      Price: {{$data2->Price}}Tk(Paid)
-    </h3>
-  </div>
-  <br>
-
-
-
-</div>
-<div class="d-flex justify-content-center mt-4">
-  <a href="/opencourse2/{{$data2->id}}" class="btn btn-info ">Open Course</a>
-</div>
-<br>
-<br>
-<br>
-<br>
-@endforeach
 @endif
 <br>
 <br>

@@ -439,7 +439,7 @@ Contact Psychologist
                 <br>
                 <br>
 
-                <div class="container2">
+                <div class="container">
 
                     <p>No Message history,send a message to start conversation...</p>
 
@@ -448,18 +448,20 @@ Contact Psychologist
 
 
             </div>
-            <div class="publisher bt-1 border-light"> <img class="avatar avatar-xs" src="{{asset('images')}}/{{$picdata2[0]->ProfilePic}}" alt="...">
-                <form action="{{route('send.Message')}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="PsyUsername" value="{{$picdata[0]->Username}}" />
-                    <input class="publisher-input" type="text" placeholder="Write something" name="PtMessage" autocomplete="off">
-                    <span class="publisher-btn file-group"> <label for="file">
-                            <i class="fa fa-paperclip"></i>
-                        </label>
-                        <input id="file" name="Files4" type="file" multiple hidden />
-                    </span>
-                    <button class="publisher-btn text-info" type="submit" data-abc="true"><i class="fa fa-paper-plane"></i></button>
-                </form>
+            <div class="container" style="padding-right:200px;padding-left:20px; text-align:center;">
+                <div class="publisher bt-1 border-light"> <img class="avatar avatar-xs" src="{{asset('images')}}/{{$picdata2[0]->ProfilePic}}" alt="...">
+                    <form action="{{route('send.Message')}}" method="post" enctype="multipart/form-data">
+                        @csrf
+                        <input type="hidden" name="PsyUsername" value="{{$picdata[0]->Username}}" />
+                        <input class="publisher-input" type="text" placeholder="Write something" name="PtMessage" autocomplete="off">
+                        <span class="publisher-btn file-group"> <label for="file">
+                                <i class="fa fa-paperclip"></i>
+                            </label>
+                            <input id="file" name="Files4" type="file" multiple hidden />
+                        </span>
+                        <button class="publisher-btn text-info" type="submit" data-abc="true"><i class="fa fa-paper-plane"></i></button>
+                    </form>
+                </div>
             </div>
         </div>
 
@@ -467,102 +469,103 @@ Contact Psychologist
         <br>
         <br>
     </div>
-    @else
-    <div class="container" style="background-color:white;">
+</div>
+@else
+<div class="container" style="background-color:white;">
+    <br>
+    <div class="container">
         <br>
-        <div class="container">
+        @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li style="text-align:center">{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        <h4 class="card-title" style="text-align:center"><strong>{{$picdata[0]->Name}}</strong></h4>
+        <div class="media media-chat">
+            <a class="btn btn-xs btn-secondary" href="/patientMessages" data-abc="true">Back</a>
             <br>
-            @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li style="text-align:center">{{ $error }}</li>
-                    @endforeach
-                </ul>
+            <br>
+            @foreach($Msgdata as $data)
+
+            @if(($data->Read1) == "1")
+            @if(($data->Read2) == "1")
+            <br>
+            <div class="container2">
+                <img src="{{asset('images')}}/{{$picdata[0]->ProfilePic}}" alt="Avatar">
+
+                <p>{{$data->PsyMessage}}</p>
+                <iframe src="{{asset('uploads')}}/{{$data->Files}}" align="left" style="border:none;" height="300" width="500" allowfullscreen></iframe>
+                <span class="time-left">{{$data->created_at}}</span>
+            </div>
+            @else
+            <br>
+            <div class="container2">
+                <img src="{{asset('images')}}/{{$picdata[0]->ProfilePic}}" alt="Avatar">
+                <p>{{$data->PsyMessage}}</p>
+                <span class="time-left">{{$data->created_at}}</span>
             </div>
             @endif
+            @elseif(($data->Read1) == "0")
+            @if(($data->Read2) == "1")
+            <br>
+            <div class="container2 darker">
+                <img src="{{asset('images')}}/{{$picdata2[0]->ProfilePic}}" alt="Avatar" class="right">
 
-            <h4 class="card-title" style="text-align:center"><strong>{{$picdata[0]->Name}}</strong></h4>
-            <div class="media media-chat">
-                <a class="btn btn-xs btn-secondary" href="/patientMessages" data-abc="true">Back</a>
-                <br>
-                <br>
-                @foreach($Msgdata as $data)
+                <p style="text-align:right">{{$data->PtMessage}}</p>
+                <iframe src="{{asset('uploads')}}/{{$data->Files}}" align="right" style="border:none;" height="300" width="500" allowfullscreen>
+                    <img src="{{asset('uploads')}}/{{$data->Files}}" class="right"></iframe>
 
-                @if(($data->Read1) == "1")
-                @if(($data->Read2) == "1")
-                <br>
-                <div class="container2">
-                    <img src="{{asset('images')}}/{{$picdata[0]->ProfilePic}}" alt="Avatar">
-
-                    <p>{{$data->PsyMessage}}</p>
-                    <iframe src="{{asset('uploads')}}/{{$data->Files}}" align="left" style="border:none;" height="300" width="500" allowfullscreen></iframe>
-                    <span class="time-left">{{$data->created_at}}</span>
-                </div>
-                @else
-                <br>
-                <div class="container2">
-                    <img src="{{asset('images')}}/{{$picdata[0]->ProfilePic}}" alt="Avatar">
-                    <p>{{$data->PsyMessage}}</p>
-                    <span class="time-left">{{$data->created_at}}</span>
-                </div>
-                @endif
-                @elseif(($data->Read1) == "0")
-                @if(($data->Read2) == "1")
-                <br>
-                <div class="container2 darker">
-                    <img src="{{asset('images')}}/{{$picdata2[0]->ProfilePic}}" alt="Avatar" class="right">
-
-                    <p style="text-align:right">{{$data->PtMessage}}</p>
-                    <iframe src="{{asset('uploads')}}/{{$data->Files}}" align="right" style="border:none;" height="300" width="500" allowfullscreen>
-                        <img src="{{asset('uploads')}}/{{$data->Files}}" class="right"></iframe>
-
-                    <span class="time-right">{{$data->created_at}}</span>
-                </div>
-                @else
-                <br>
-                <div class="container2 darker">
-                    <img src="{{asset('images')}}/{{$picdata2[0]->ProfilePic}}" alt="Avatar" class="right">
-                    <p style="text-align:right">{{$data->PtMessage}}</p>
-                    <span class="time-right">{{$data->created_at}}</span>
-                </div>
-                @endif
-                @endif
-                @endforeach
-
+                <span class="time-right">{{$data->created_at}}</span>
             </div>
-
-            <div class="publisher bt-1 border-light"> <img class="avatar avatar-xs" src="{{asset('images')}}/{{$picdata2[0]->ProfilePic}}" alt="...">
-
-                <form action="{{route('send.Message')}}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    <input type="hidden" name="PsyUsername" value="{{$Msgdata[0]->PsyUsername}}" />
-                    <input class="publisher-input" type="text" placeholder="Write something" name="PtMessage" autocomplete="off">
-
-                    <span class="publisher-btn file-group" enctype="multipart/form-data"> <label for="file">
-                            <i class="fa fa-paperclip"></i>
-                        </label>
-                        <input type="file" name="Files4" id="file" class="form-control" />
-
-                    </span>
-                    <button type="submit" name="submit" class="publisher-btn text-info"><i class="fa fa-paper-plane"></i></button>
-                </form>
+            @else
+            <br>
+            <div class="container2 darker">
+                <img src="{{asset('images')}}/{{$picdata2[0]->ProfilePic}}" alt="Avatar" class="right">
+                <p style="text-align:right">{{$data->PtMessage}}</p>
+                <span class="time-right">{{$data->created_at}}</span>
             </div>
+            @endif
+            @endif
+            @endforeach
+
         </div>
 
-        <br>
-        <br>
-        <br>
+        <div class="publisher bt-1 border-light"> <img class="avatar avatar-xs" src="{{asset('images')}}/{{$picdata2[0]->ProfilePic}}" alt="...">
+
+            <form action="{{route('send.Message')}}" method="post" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="PsyUsername" value="{{$Msgdata[0]->PsyUsername}}" />
+                <input class="publisher-input" type="text" placeholder="Write something" name="PtMessage" autocomplete="off">
+
+                <span class="publisher-btn file-group" enctype="multipart/form-data"> <label for="file">
+                        <i class="fa fa-paperclip"></i>
+                    </label>
+                    <input type="file" name="Files4" id="file" class="form-control" />
+
+                </span>
+                <button type="submit" name="submit" class="publisher-btn text-info"><i class="fa fa-paper-plane"></i></button>
+            </form>
+        </div>
     </div>
 
-    @endif
     <br>
     <br>
     <br>
-    <br>
-    <br>
-    <br>
+</div>
+
+@endif
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 
 
-    @stop
+@stop

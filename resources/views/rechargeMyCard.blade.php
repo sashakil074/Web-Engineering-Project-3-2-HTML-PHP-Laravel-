@@ -71,6 +71,11 @@ Recharge My Card
     {{Session::get('recharge_requested')}}
   </div>
   @endif
+  @if(Session::get('invalidamount'))
+  <div class="alert alert-danger">
+    {{Session::get('invalidamount')}}
+  </div>
+  @endif
 </div>
 <h2 style=" text-align: center">Recharge My Card</h2>
 <div class="container article" style="border-style: none;">

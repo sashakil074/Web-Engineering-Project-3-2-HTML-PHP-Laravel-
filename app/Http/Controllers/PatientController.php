@@ -36,13 +36,14 @@ class PatientController extends Controller
   public function showCourse(Request $request)
   {
     $coursedata = Course::all();
+    $coursedata2 = Payment::all();
     $temp = 0;
 
     if (Payment::where('PtUsername', $request->session()->get('user'))->exists()) {
 
-      $subdata = Course::where('CourseID', $coursedata->CourseID)->get('*');
+      // $subdata = Course::where('CourseID', $coursedata2->CourseID)->get('*');
       $temp = 1;
-      return view('patientcourses', compact('coursedata', 'subdata', 'temp'));
+      return view('patientcourses', compact('coursedata', 'temp'));
     } else {
       return view('patientcourses', compact('coursedata', 'temp'));
     }
@@ -242,7 +243,7 @@ class PatientController extends Controller
     $request->validate(
       [
         'Card_no' => 'required',
-        'Amount' => 'required'
+        'Amount' => 'required '
       ]
     );
 
@@ -255,9 +256,14 @@ class PatientController extends Controller
     $rechargeData->Amount = $request->input('Amount');
     $rechargeData->Status = '0';
 
-    $rechargeData->save();
+    if ($rechargeData->Amount < '50') {
+      $request->session()->flash('invalidamount', 'The recharge amount is invalid,amount must be at least 50tk ');
+      return redirect('rechargeMyCard');
+    } else {
+      $rechargeData->save();
 
-    return back()->with('recharge_requested', 'Recharge request has been sent successfully');
+      return back()->with('recharge_requested', 'Recharge request has been sent successfully');
+    }
   }
 
 
